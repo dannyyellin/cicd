@@ -20,7 +20,8 @@ jobs:
     - name: Set DATE
       run: echo "DATE=$(date -I)" >> $GITHUB_ENV
     - name: Build the Docker image
-      run: docker build . --file Dockerfile.setport --tag \\
-           ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
+      run: |
+        docker build . --file Dockerfile.setport --tag \
+        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
     - name: Push the Docker image to DH
       run: docker push ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
