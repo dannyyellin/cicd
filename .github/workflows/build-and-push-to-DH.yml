@@ -23,7 +23,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
     -
       name: Set DATE
-      run: "DATE=$(date -I)" >> $GITHUB_ENV
+      run: echo "DATE=$(date -I)" >> $GITHUB_ENV
     -
       name: Build the Docker image
       run: docker build . --file Dockerfile.setport --tag ${{ secrets.DOCKER_USERNAME }}/wordsvr-v2:${{ env.DATE }}
