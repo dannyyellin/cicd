@@ -24,7 +24,7 @@ jobs:
       run: |
         docker build . --file Dockerfile.setport --tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
         # this gets the "latest" tag.   we also want a version with this date
-        docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2 \\
+        docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2 \
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
     - name: Push the Docker image to DH
       run: |
