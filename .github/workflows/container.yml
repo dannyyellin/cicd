@@ -26,15 +26,15 @@ jobs:
 #      - name: Set up Docker
 #        uses: docker/setup-docker@v2
 
-      - name: check if running
-      - run: docker ps
+    - name: check if running
+    - run: docker ps
         # run: echo "hi"
 
-      - name: post a user example
-        run: |
-          curl --location 'http://localhost:5001/dishes' \
-          --header 'Content-Type: application/json' \
-          --data '{"name":"garlic bread"}'
+    - name: post a user example
+      run: |
+       curl --location 'http://localhost:5001/dishes' \
+       --header 'Content-Type: application/json' \
+       --data '{"name":"garlic bread"}'
 
 #          CODE= "curl -- location 'http://0.0.0.0:5001/dishes' \
 #            --output /dev/null \
