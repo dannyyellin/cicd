@@ -17,8 +17,8 @@ jobs:
           username: ${{ secrets.DOCKER_COURSE_USERNAME }}
           password: ${{ secrets.DOCKER_COURSE_PASSWORD }}
 
-    - name: pull image
-      run: docker pull $DOCKER_USERNAME/wordsvr-2:latest
+#    - name: pull image
+#      run: docker pull $DOCKER_USERNAME/wordsvr-2:latest
 
 #    services:
 #      wordcontainer:
