@@ -35,8 +35,8 @@ jobs:
         run: |
           curl --location 'http://localhost:5001/dishes' \
           --header 'Content-Type: application/json' \
-          --data '{
-              "name":"garlic bread"
+          --data '{ \
+              "name":"garlic bread" \
           }'
 
 #          CODE= "curl -- location 'http://0.0.0.0:5001/dishes' \
