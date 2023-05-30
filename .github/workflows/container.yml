@@ -1,0 +1,35 @@
+name: pull and run image in a container
+on: push
+
+jobs:
+  job-name:
+    runs-on: ubuntu-latest
+    services:
+      service-name-1:
+        image: ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
+        ports:
+           - 3001:3000
+
+#      service-name-2:
+#        image: dockerhub-username:docker-image-2
+#        ports:
+#           - 4001:4000
+
+    steps:
+#      - name: Get from service-1
+#        run: http://localhost:3001/api/users
+#
+#      - name: Get from service-2
+#        run: http://localhost:4001/api/items
+
+
+      - name: post a user example
+        run: |
+          CODE=`curl --write-out '%{http_code}' \
+            -- location 'http://0.0.0.0:5001/dishes' \
+            --output /dev/null \
+            --request POST \
+            --header 'content-type: application/json' \
+            --data '{ \
+                "name":"garlic bread"
+              }'
