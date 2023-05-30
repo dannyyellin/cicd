@@ -6,9 +6,9 @@ jobs:
   job-name:
     runs-on: ubuntu-latest
     services:
-      wordcontainer: #service-name-1:
-        #image: ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
-        image: dannyteaching/wordsvr-v2:latest
+      wordcontainer:
+        image: ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
+#        image: dannyteaching/wordsvr-v2:latest
         ports:
            - 8000:8000
     steps:
@@ -22,8 +22,8 @@ jobs:
       run: |
         echo curl --location --request POST 'http://127.0.0.1:8000/words?word=wood' >> mypath/results
         echo $(curl --location --request POST 'http://127.0.0.1:8000/words?word=wood') >> mypath/results
-        echo curl --location --request POST 'http://127.0.0.1:8000/words?word=tooth' >> mypath/results
-        echo $(curl --location --request POST 'http://127.0.0.1:8000/words?word=tooth') >> mypath/results
+        echo curl --location --request POST 'http://127.0.0.1:8000/words?word=silver' >> mypath/results
+        echo $(curl --location --request POST 'http://127.0.0.1:8000/words?word=silver') >> mypath/results
         echo curl --location --request GET 'http://127.0.0.1:8000/words' >> mypath/results
         echo $(curl --location --request GET 'http://127.0.0.1:8000/words') >> mypath/results
 
