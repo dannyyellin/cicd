@@ -21,12 +21,12 @@ jobs:
       with:
           username: ${{ secrets.DOCKER_COURSE_USERNAME }}
           password: ${{ secrets.DOCKER_COURSE_PASSWORD }}
-
-    - name: Set DATE
+`
+    - name: Set DATE env variable
       run: echo "DATE=$(date -I)" >> $GITHUB_ENV
 
-    - name: Create image names env variables
-      run: echo "Image_name_dated=${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest" >> $GITHUB_ENV
+    - name: Set image names env variable
+      run: echo "IMAGE_NAME=/wordsvr-v2:latest" >> $GITHUB_ENV
 
     - name: Build the Docker image
       run: |
@@ -42,5 +42,5 @@ jobs:
         docker push \
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
 
-    # - name: store image name to GITHUB_ENV
+    \
 
