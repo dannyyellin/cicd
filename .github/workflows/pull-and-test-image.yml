@@ -16,13 +16,13 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_COURSE_USERNAME }}
         password: ${{ secrets.DOCKER_COURSE_PASSWORD }}
-    - name: pull image
-      run: |
-        docker pull \
-        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
+#    - name: pull image
+#      run: |
+#        docker pull \
+#        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
     - name: Run the image
       # run: docker run ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest in detached
-      run:  docker run -d -p 80:80 wordsvr-v2:latest
+      run:  docker run -d -p 80:80 ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
 
     - name: echo
       run:  echo "running image"
