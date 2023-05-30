@@ -1,8 +1,6 @@
 # This is same code as used in topic-3-docker
 # This module, rest-word-svr-v2.py, augments rest-word-svr-v1.py, to run in a Docker container.
 
-import sys
-
 # It uses Flask to build a RESTful service in Python.
 # To run this program in a docker container, include the following cmds in the Dockerfile:
 #     export FLASK_APP="rest-word-svr-v2.py"
@@ -32,6 +30,7 @@ app = Flask(__name__)  # initialize Flask
 api = Api(app)  # create API
 
 col = WordCollection()    # create WordCollection instance with global scope
+
 
 # wordCollection class stores the words and perform operations on them
 class WordCollection:
@@ -88,6 +87,7 @@ class WordCollection:
         print("WordCollection: retrieving all words:")
         print(self.wrds)
         return self.wrds
+
 
 # The Words class implements the REST operations for the /words resource
 class Words(Resource):
