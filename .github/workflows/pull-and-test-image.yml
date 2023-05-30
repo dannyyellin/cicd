@@ -2,7 +2,6 @@ name: Pull and Test Docker Image
 #on:
 #  repository_dispatch:
 #    types: trigger-test
-
 on:
   workflow_dispatch
   # see https://docs.github.com/en/actions/managing-workflow-runs/manually-running-a-workflow
