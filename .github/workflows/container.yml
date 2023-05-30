@@ -18,7 +18,7 @@ jobs:
 
     - name: post a user example
       run: |
-       result=$(curl --location 'http://container:8000/dishes' \
+       result=$(curl --location 'http://localhost:8000/dishes' \
        --header 'Content-Type: application/json' \
        --data '{"name":"garlic bread"}')
     - name: check result
