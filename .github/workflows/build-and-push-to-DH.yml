@@ -6,7 +6,7 @@ on:
     branches:
       - main
     tags:
-      - 'release*'
+      - 'frelease*'
 
 jobs:
   build:
