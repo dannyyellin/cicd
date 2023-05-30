@@ -10,13 +10,21 @@ jobs:
         image: dannyteaching/wordsvr-v2:latest
         ports:
            - 5001:8000
+    steps:
+    - name: check if running
+      run: docker ps
+        # run: echo "hi"
+
+    - name: post a user example
+      run: |
+       curl --location 'http://localhost:5001/dishes' \
+       --header 'Content-Type: application/json' \
+       --data '{"name":"garlic bread"}'
 
 #      service-name-2:
 #        image: dockerhub-username:docker-image-2
 #        ports:
 #           - 4001:4000
-
-    steps:
 #      - name: Get from service-1
 #        run: http://localhost:3001/api/users
 #
@@ -25,16 +33,6 @@ jobs:
 
 #      - name: Set up Docker
 #        uses: docker/setup-docker@v2
-
-    - name: check if running
-    - run: docker ps
-        # run: echo "hi"
-
-    - name: post a user example
-      run: |
-       curl --location 'http://localhost:5001/dishes' \
-       --header 'Content-Type: application/json' \
-       --data '{"name":"garlic bread"}'
 
 #          CODE= "curl -- location 'http://0.0.0.0:5001/dishes' \
 #            --output /dev/null \
