@@ -11,16 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: test env.Image_name_dated
-      run: |
-        if ${{ env.DATE }}:
-        then
-          echo ${{ env.DATE }} " is defined"
-        else
-          echo "env.DATE not defined"
-        fi
-        echo "${{ env.DATE }}"
-        echo "${{ env.IMAGE_NAME }}"
 
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
@@ -33,18 +23,17 @@ jobs:
 
     - name: echo
       run:  echo "running image"
-#    - name: test the image
-#      run: |
-#        CODE=`curl --write-out '%{http_code}' \
-#        --silent \
-#        --output /dev/null \
-#        --request PUT \
-#        --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-#        --header 'content-type: application/json' \
-#        --url 'https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.inputs.pr_num }}/merge' \
-#        --data '{ \
-#        "merge_method": "squash", \
-#        "commit_title": "Squash and Merge for Pull Request ${{ github.event.inputs.pr_num }}", \
-#        "commit_message": "expected sha value = ${{ github.event.inputs.pr_head_sha }}", \
-#        "sha": "${{ github.event.inputs.pr_head_sha }}" \
-#      }'`
+
+    - name: test the image
+      run: |
+        CODE=`curl --write-out '%{http_code}' \
+        -- location 'http://0.0.0.0:5001/dishes' \
+      #  --silent \
+        --output /dev/null \
+        --request POST \
+      #   --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+        --header 'content-type: application/json' \
+      #  --url 'https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.inputs.pr_num }}/merge' \
+        --data '{ \
+          "name":"garlic bread"
+        }'
