@@ -25,6 +25,7 @@
 
 from flask import Flask  # , jsonify
 from flask_restful import Resource, Api, reqparse
+import sys
 
 app = Flask(__name__)  # initialize Flask
 api = Api(app)  # create API
@@ -101,6 +102,8 @@ class Words(Resource):
         args = parser.parse_args()  # parse arguments into a dictionary structure
         w = args["word"]
         # add w to collection
+        print("rest-word-svr-v2.py: posting word ", w)
+        sys.stdout.flush()
         key = col.insertWord(w)
         if key == 0:   # word already exists
             return key, 400
