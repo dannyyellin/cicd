@@ -20,8 +20,8 @@ jobs:
 
     - name: Curl
       run: |
-        echo=$(curl --location --request POST 'http://127.0.0.1:8000/words?word=fine') >> mypath
-        echo $(curl --location --request GET 'http://127.0.0.1:8000/words') >> mypath
+        echo=$(curl --location --request POST 'http://127.0.0.1:8000/words?word=fine') >> mypath/log
+        echo $(curl --location --request GET 'http://127.0.0.1:8000/words') >> mypath/log
 #    - name: check result
 #      run: |
 #        echo "result = "
