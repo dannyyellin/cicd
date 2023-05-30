@@ -29,7 +29,7 @@ from flask_restful import Resource, Api, reqparse
 app = Flask(__name__)  # initialize Flask
 api = Api(app)  # create API
 
-col = WordCollection()    # create WordCollection instance with global scope
+global col
 
 
 # wordCollection class stores the words and perform operations on them
@@ -88,6 +88,7 @@ class WordCollection:
         print(self.wrds)
         return self.wrds
 
+col = WordCollection()    # create WordCollection instance with global scope
 
 # The Words class implements the REST operations for the /words resource
 class Words(Resource):
