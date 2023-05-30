@@ -1,4 +1,4 @@
-name: pull and run image in a container
+name: container
 on: push
 
 jobs:
@@ -6,7 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     services:
       service-name-1:
-        image: ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
+        #image: ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
+        image: dannyteaching/wordsvr-v2:latest
         ports:
            - 3001:3000
 
