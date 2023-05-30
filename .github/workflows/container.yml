@@ -24,7 +24,12 @@ jobs:
     - name: check result
       run: |
         echo "response = "
-        echo $response
+        if $response
+        then 
+          echo  $response
+        else
+          echo "response is empty"
+        fi
 
     - name: check if still running
       run: docker ps
