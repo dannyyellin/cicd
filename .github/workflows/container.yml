@@ -22,6 +22,7 @@ jobs:
       run: |
         result=$(curl 'http://127.0.0.1:8000/dishes' \
         --header 'Content-Type: application/json' \
+        -- X POST \
         --data '{"name":"garlic bread"}')
     - name: check result
       run: |
