@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build and Push Docker Image
 on: release
 #  push:
 #    branches:
@@ -21,9 +21,13 @@ jobs:
       run: echo "DATE=$(date -I)" >> $GITHUB_ENV
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile.setport --tag \
+        docker build . --file Dockerfile.setport --tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
+        # this gets the "latest" tag.   we also want a version with this date
+        docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2 \\
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
     - name: Push the Docker image to DH
       run: |
+        # push both versions to Docker Hub
+        docker push ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
         docker push \
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}

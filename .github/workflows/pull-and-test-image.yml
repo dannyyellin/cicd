@@ -1,4 +1,4 @@
-name: Test Docker Image
+name: Pull and Test Docker Image
 #on:
 #  repository_dispatch:
 #    types: trigger-test
@@ -21,6 +21,7 @@ jobs:
       run: |
         docker pull \
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
+    
 
     - name: echo
       run:  echo "pulled image"
