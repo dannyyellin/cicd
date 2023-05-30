@@ -21,6 +21,8 @@ jobs:
        --header 'Content-Type: application/json' \
        --data '{"name":"garlic bread"}'
 
+    - name: check if still running
+      run: docker ps
 #      service-name-2:
 #        image: dockerhub-username:docker-image-2
 #        ports:

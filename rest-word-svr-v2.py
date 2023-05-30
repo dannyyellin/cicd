@@ -29,8 +29,6 @@ from flask_restful import Resource, Api, reqparse
 app = Flask(__name__)  # initialize Flask
 api = Api(app)  # create API
 
-global col
-
 
 # wordCollection class stores the words and perform operations on them
 class WordCollection:
