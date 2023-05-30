@@ -1,5 +1,6 @@
 name: container
 on:
+  push
 
 jobs:
   job-name:
