@@ -22,7 +22,9 @@ jobs:
        --header 'Content-Type: application/json' \
        --data '{"name":"garlic bread"}')
     - name: check result
-      run: echo result
+      run: |
+        echo "result.response = "
+        echo result.response
 
     - name: check if still running
       run: docker ps
