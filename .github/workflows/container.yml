@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       container: #service-name-1:
+        label: mycontainer
         #image: ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
         image: dannyteaching/wordsvr-v2:latest
         ports:
