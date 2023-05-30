@@ -43,4 +43,4 @@ jobs:
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
 
     - name: store image name to GITHUB_ENV
-      run: echo
+      run: echo "name"
