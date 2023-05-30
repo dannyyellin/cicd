@@ -21,9 +21,9 @@ jobs:
       # run: docker run ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest in detached
       run:  docker run -d -p 80:80 ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
 
-    - name: echo
-      run: echo "running image"
-
+#    - name: echo
+#      run: echo "running image"
+#
 
     - name: test the image
       run: |
