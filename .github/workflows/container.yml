@@ -28,7 +28,7 @@ jobs:
         uses: docker/setup-docker@v2
 
       - name: check if running
-      - run: docker ps
+      - run: echo "hi"  # docker ps
         # run: echo "hi"
 
       - name: post a user example
