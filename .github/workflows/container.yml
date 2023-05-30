@@ -20,7 +20,7 @@ jobs:
 
     - name: post a user example
       run: |
-        result = $(curl --location --request GET 'http://127.0.0.1:8000/words')
+        echo $(curl --location --request GET 'http://127.0.0.1:8000/words')
 #        result=$(curl --location --request POST 'http://127.0.0.1:8000/words?word=fine')
 #        \
 #        --header 'Content-Type: application/json' \
