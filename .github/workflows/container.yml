@@ -23,8 +23,8 @@ jobs:
        --data '{"name":"garlic bread"}')
     - name: check result
       run: |
-        echo "result.response = "
-        echo result.response
+        echo "response = "
+        echo $response
 
     - name: check if still running
       run: docker ps
