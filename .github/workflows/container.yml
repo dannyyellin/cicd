@@ -23,8 +23,6 @@ jobs:
         echo $(curl --location --request GET 'http://127.0.0.1:8000/words')
         echo=$(curl --location --request POST 'http://127.0.0.1:8000/words?word=fine')
         echo $(curl --location --request GET 'http://127.0.0.1:8000/words')
-#        --header 'Content-Type: application/json' \
-#        --data '{"name":"garlic bread"}')
     - name: check result
       run: |
         echo "result = "
