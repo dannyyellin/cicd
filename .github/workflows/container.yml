@@ -12,8 +12,13 @@ jobs:
     steps:
     - name: Pull Docker image
       run: |
-        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-        docker pull $DOCKER_USERNAME/wordsvr-2:latest
+      uses: docker/login-action@v2
+      with:
+          username: ${{ secrets.DOCKER_COURSE_USERNAME }}
+          password: ${{ secrets.DOCKER_COURSE_PASSWORD }}
+
+    - name: pull image
+      run: docker pull $DOCKER_USERNAME/wordsvr-2:latest
 
 #    services:
 #      wordcontainer:
