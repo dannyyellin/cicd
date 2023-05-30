@@ -18,7 +18,7 @@ jobs:
 
     - name: post a user example
       run: |
-       curl --location 'http://localhost:5001/dishes' \
+       curl --location 'http://localhost:8000/dishes' \
        --header 'Content-Type: application/json' \
        --data '{"name":"garlic bread"}'
 
