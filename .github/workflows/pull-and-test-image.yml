@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: test env
+    - name: test env.Image_name_dated
       run: echo $env.Image_name_dated
 
     - name: Log in to Docker Hub
