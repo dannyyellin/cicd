@@ -26,7 +26,7 @@ jobs:
       run: echo "DATE=$(date -I)" >> $GITHUB_ENV
 
     - name: Create image names env variables
-      run: echo "Image_name_dated = ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest"m>> $GITHUB_ENV
+      run: echo "Image_name_dated=${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest" >> $GITHUB_ENV
 
     - name: Build the Docker image
       run: |
