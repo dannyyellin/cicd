@@ -20,10 +20,9 @@ jobs:
 
     - name: post a user example
       run: |
-        result=$(curl 'http://127.0.0.1:8000/dishes' \
+        result=$(curl --location --request POST 'http://127.0.0.1:8000/dishes' \
         --header 'Content-Type: application/json' \
-        --data '{"name":"garlic bread"}' \
-        -- request POST)
+        --data '{"name":"garlic bread"}')
     - name: check result
       run: |
         echo "result = "
