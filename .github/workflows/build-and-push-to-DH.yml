@@ -1,7 +1,7 @@
 name: Build and Push Docker Image
 on:
   push:
-    branches: master
+#    branches: master
 # on: release
 #  push:
 #    branches:
@@ -43,4 +43,4 @@ jobs:
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
 
     - name: store image name to GITHUB_ENV
-      run: echo "name"
+
