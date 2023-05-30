@@ -6,7 +6,7 @@ jobs:
   job-name:
     runs-on: ubuntu-latest
     services:
-      service-name-1:
+      container: #service-name-1:
         #image: ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
         image: dannyteaching/wordsvr-v2:latest
         ports:
@@ -18,7 +18,7 @@ jobs:
 
     - name: post a user example
       run: |
-       result=$(curl --location 'http://localhost:8000/dishes' \
+       result=$(curl --location 'http://container:8000/dishes' \
        --header 'Content-Type: application/json' \
        --data '{"name":"garlic bread"}')
     - name: check result
