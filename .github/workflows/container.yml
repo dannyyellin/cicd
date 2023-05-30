@@ -8,34 +8,38 @@ jobs:
     env:
       SECRET_USERNAME: ${{ secrets.DOCKER_COURSE_USERNAME }}
 
-    services:
-      wordcontainer:
-        image: $SECRET_USERNAME/wordsvr-v2:latest
-#        image: dannyteaching/wordsvr-v2:latest
-        ports:
-           - 8000:8000
-
     steps:
-    - name: check if app is running
-      run: docker ps
+      - name: Print Secret
+        run: echo $SECRET_USERNAME
 
-    - name: Print Secret
-      run: echo $SECRET_USERNAME
-
-    - name: create directory
-      run: mkdir -p mypath
-
-    - name: curl
-      run: |
-        echo curl --location --request POST 'http://127.0.0.1:8000/words?word=wood' >> mypath/results
-        echo $(curl --location --request POST 'http://127.0.0.1:8000/words?word=wood') >> mypath/results
-        echo curl --location --request POST 'http://127.0.0.1:8000/words?word=silver' >> mypath/results
-        echo $(curl --location --request POST 'http://127.0.0.1:8000/words?word=silver') >> mypath/results
-        echo curl --location --request GET 'http://127.0.0.1:8000/words' >> mypath/results
-        echo $(curl --location --request GET 'http://127.0.0.1:8000/words') >> mypath/results
-
-    - name: curl results
-      run: cat mypath/results
+#    services:
+#      wordcontainer:
+#        image: $SECRET_USERNAME/wordsvr-v2:latest
+##        image: dannyteaching/wordsvr-v2:latest
+#        ports:
+#           - 8000:8000
+#
+##    steps:
+#    - name: check if app is running
+#      run: docker ps
+#
+#    - name: Print Secret
+#      run: echo $SECRET_USERNAME
+#
+#    - name: create directory
+#      run: mkdir -p mypath
+#
+#    - name: curl
+#      run: |
+#        echo curl --location --request POST 'http://127.0.0.1:8000/words?word=wood' >> mypath/results
+#        echo $(curl --location --request POST 'http://127.0.0.1:8000/words?word=wood') >> mypath/results
+#        echo curl --location --request POST 'http://127.0.0.1:8000/words?word=silver' >> mypath/results
+#        echo $(curl --location --request POST 'http://127.0.0.1:8000/words?word=silver') >> mypath/results
+#        echo curl --location --request GET 'http://127.0.0.1:8000/words' >> mypath/results
+#        echo $(curl --location --request GET 'http://127.0.0.1:8000/words') >> mypath/results
+#
+#    - name: curl results
+#      run: cat mypath/results
 
 
 
