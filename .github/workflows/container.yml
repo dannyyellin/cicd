@@ -15,8 +15,8 @@ jobs:
     - name: check if running
       run: docker ps
 
-    - name: ping server
-      run: ping 127.0.0.1
+#    - name: ping server
+#      run: ping 127.0.0.1
 
     - name: post a user example
       run: |
