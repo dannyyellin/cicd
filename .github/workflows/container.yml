@@ -26,11 +26,11 @@ jobs:
 
       - name: post a user example
         run: |
-          CODE=curl --write-out '%{http_code}' \
-            -- location 'http://0.0.0.0:5001/dishes' \
+          CODE=curl -- location 'http://0.0.0.0:5001/dishes' \
             --output /dev/null \
             --request POST \
             --header 'content-type: application/json' \
             --data '{ \
                 "name":"garlic bread"
               }'
+# --write-out '%{http_code}' \
