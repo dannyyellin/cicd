@@ -15,6 +15,9 @@ jobs:
     - name: check if running
       run: docker ps
 
+    - name: ping server
+      run: ping 127.0.0.1:8000
+
     - name: post a user example
       run: |
         result=$(curl 'http://127.0.0.1:8000/dishes' \
@@ -22,12 +25,12 @@ jobs:
         --data '{"name":"garlic bread"}')
     - name: check result
       run: |
-        echo "response = "
-        if $response
+        echo "result = "
+        if $result
         then 
-          echo  $response
+          echo  $result
         else
-          echo "response is empty"
+          echo "result is empty"
           fi
 
     - name: check if still running
