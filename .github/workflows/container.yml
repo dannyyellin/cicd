@@ -11,7 +11,7 @@ jobs:
         image: dannyteaching/wordsvr-v2:latest
         ports:
            - 5001:8000
-           -
+
 #      service-name-2:
 #        image: dockerhub-username:docker-image-2
 #        ports:
