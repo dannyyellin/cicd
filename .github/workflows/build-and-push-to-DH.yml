@@ -1,5 +1,7 @@
 name: Build and Push Docker Image
-on: release
+on: push
+branch: main
+# on: release
 #  push:
 #    branches:
 #      - "main"
