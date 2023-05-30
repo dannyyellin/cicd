@@ -27,7 +27,8 @@ jobs:
 #           - 8000:8000
 
     - name: run container
-      run: docker run -p 8080:8080 $DOCKER_USERNAME/wordsvr-2:latest
+#      run: docker run -p 8080:8080 $DOCKER_USERNAME/wordsvr-2:latest
+      run: docker run -p 8080:8080 dannyteaching/wordsvr-2:latest
 
     - name: check if app is running
       run: docker ps
