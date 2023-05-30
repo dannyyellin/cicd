@@ -21,7 +21,7 @@ jobs:
       with:
           username: ${{ secrets.DOCKER_COURSE_USERNAME }}
           password: ${{ secrets.DOCKER_COURSE_PASSWORD }}
-`
+
     - name: Set DATE env variable
       run: echo "DATE=$(date -I)" >> $GITHUB_ENV
 
