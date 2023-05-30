@@ -6,32 +6,31 @@ jobs:
   job-name:
     runs-on: ubuntu-latest
     services:
-      mycontainer: #service-name-1:
+      wordcontainer: #service-name-1:
         #image: ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
         image: dannyteaching/wordsvr-v2:latest
         ports:
            - 8000:8000
     steps:
+    - uses: actions/checkout@v3
+    - run: mkdir -p mypath
+
     - name: check if running
       run: docker ps
 
-#    - name: ping server
-#      run: ping 127.0.0.1
-
-    - name: post a user example
+    - name: Curl
       run: |
-        echo $(curl --location --request GET 'http://127.0.0.1:8000/words')
-        echo=$(curl --location --request POST 'http://127.0.0.1:8000/words?word=fine')
-        echo $(curl --location --request GET 'http://127.0.0.1:8000/words')
-    - name: check result
-      run: |
-        echo "result = "
-        if $result
-        then 
-          echo  $result
-        else
-          echo "result is empty"
-          fi
+        echo=$(curl --location --request POST 'http://127.0.0.1:8000/words?word=fine') >> mypath
+        echo $(curl --location --request GET 'http://127.0.0.1:8000/words') >> mypath
+#    - name: check result
+#      run: |
+#        echo "result = "
+#        if $result
+#        then
+#          echo  $result
+#        else
+#          echo "result is empty"
+#          fi
 
     - name: check if still running
       run: docker ps
@@ -41,24 +40,3 @@ jobs:
 
 
 
-
-#      service-name-2:
-#        image: dockerhub-username:docker-image-2
-#        ports:
-#           - 4001:4000
-#      - name: Get from service-1
-#        run: http://localhost:3001/api/users
-#
-#      - name: Get from service-2
-#        run: http://localhost:4001/api/items
-
-#      - name: Set up Docker
-#        uses: docker/setup-docker@v2
-
-#          CODE= "curl -- location 'http://0.0.0.0:5001/dishes' \
-#            --output /dev/null \
-#            --request POST \
-#            --header 'content-type: application/json' \
-#            --data '{"name":"garlic bread"}' \
-#          "
-# --write-out '%{http_code}' \
