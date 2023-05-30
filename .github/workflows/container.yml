@@ -10,7 +10,7 @@ jobs:
 
     services:
       wordcontainer:
-        image: ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
+        image: $SECRET_USERNAME/wordsvr-v2:latest
 #        image: dannyteaching/wordsvr-v2:latest
         ports:
            - 8000:8000
