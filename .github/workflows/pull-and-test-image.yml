@@ -20,12 +20,6 @@ jobs:
         password: ${{ secrets.DOCKER_COURSE_PASSWORD }}
     - name: try
       run: ps
-
-#    - name: Run the image
-#      run: docker run ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest in detached
-#      run:
-#        docker run -d -p 80:80 ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
-
     - name: test the image
       run: |
         CODE=`curl --write-out '%{http_code}' \
@@ -39,3 +33,8 @@ jobs:
         --data '{ \
           "name":"garlic bread"
         }'
+
+#    - name: Run the image
+#      run: docker run ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest in detached
+#      run:
+#        docker run -d -p 80:80 ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
