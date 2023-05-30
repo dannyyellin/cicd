@@ -30,7 +30,6 @@ jobs:
             --output /dev/null \
             --request POST \
             --header 'content-type: application/json' \
-            --data '{ \
-                "name":"garlic bread"
-              }'"
+            --data '{"name":"garlic bread"}' \
+          "
 # --write-out '%{http_code}' \
