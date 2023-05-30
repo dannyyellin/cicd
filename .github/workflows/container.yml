@@ -11,8 +11,6 @@ jobs:
         image: dannyteaching/wordsvr-v2:latest
         ports:
            - 8000:8000
-        expose:
-          - 8000
     steps:
     - name: check if running
       run: docker ps
