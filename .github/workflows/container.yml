@@ -20,13 +20,14 @@ jobs:
 
     - name: curl
       run: |
-        echo curl --location --request POST 'http://127.0.0.1:8000/words?word=fine' >> mypath/results
+        echo curl --location --request POST 'http://127.0.0.1:8000/words?word=wood' >> mypath/results
         echo $(curl --location --request POST 'http://127.0.0.1:8000/words?word=wood') >> mypath/results
+        echo curl --location --request POST 'http://127.0.0.1:8000/words?word=tooth' >> mypath/results
         echo $(curl --location --request POST 'http://127.0.0.1:8000/words?word=tooth') >> mypath/results
         echo curl --location --request GET 'http://127.0.0.1:8000/words' >> mypath/results
         echo $(curl --location --request GET 'http://127.0.0.1:8000/words') >> mypath/results
 
-    - name: cat curl results
+    - name: curl results
       run: cat mypath/results
 
 
