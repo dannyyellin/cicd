@@ -1,5 +1,5 @@
 name: container
-on: push
+on:
 
 jobs:
   job-name:
@@ -9,7 +9,7 @@ jobs:
         #image: ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
         image: dannyteaching/wordsvr-v2:latest
         ports:
-           - 5001:8000
+           - 8000:8000
     steps:
     - name: check if running
       run: docker ps
