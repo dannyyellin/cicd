@@ -12,18 +12,19 @@ jobs:
         ports:
            - 8000:8000
     steps:
-#    - uses: actions/checkout@v3
-    - run: mkdir -p mypath
-
     - name: check if running
       run: docker ps
 
+    - name: create directory
+      run: mkdir -p mypath
+
     - name: Curl
       run: |
-        echo=$(curl --location --request POST 'http://127.0.0.1:8000/words?word=fine') >> mypath/log
-        echo $(curl --location --request GET 'http://127.0.0.1:8000/words') >> mypath/log
+        echo curl --location --request POST 'http://127.0.0.1:8000/words?word=fine' >> mypath/results
+        echo=$(curl --location --request POST 'http://127.0.0.1:8000/words?word=fine') >> mypath/results
+        echo $(curl --location --request GET 'http://127.0.0.1:8000/words') >> mypath/results
 
-    - name: cat file
+    - name: cat curl results
       run: cat mypath/log
 
 #    - name: check result
