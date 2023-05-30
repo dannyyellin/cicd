@@ -11,6 +11,8 @@ jobs:
         image: dannyteaching/wordsvr-v2:latest
         ports:
            - 8000:8000
+        expose:
+          - 8000
     steps:
     - name: check if running
       run: docker ps
@@ -18,7 +20,7 @@ jobs:
 
     - name: post a user example
       run: |
-       result=$(curl --location 'http://localhost:8000/dishes' \
+       result=$(curl --location 'http://mycontainer:8000/dishes' \
        --header 'Content-Type: application/json' \
        --data '{"name":"garlic bread"}')
     - name: check result
