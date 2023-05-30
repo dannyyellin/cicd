@@ -23,6 +23,8 @@ jobs:
 #      - name: Get from service-2
 #        run: http://localhost:4001/api/items
 
+      -name check if running
+      - run: docker ps
 
       - name: post a user example
         run: |
