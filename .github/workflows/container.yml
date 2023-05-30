@@ -18,27 +18,16 @@ jobs:
     - name: create directory
       run: mkdir -p mypath
 
-    - name: Curl
+    - name: curl
       run: |
         echo curl --location --request POST 'http://127.0.0.1:8000/words?word=fine' >> mypath/results
         echo=$(curl --location --request POST 'http://127.0.0.1:8000/words?word=fine') >> mypath/results
+        echo curl --location --request GET 'http://127.0.0.1:8000/words' >> mypath/results
         echo $(curl --location --request GET 'http://127.0.0.1:8000/words') >> mypath/results
 
     - name: cat curl results
-      run: cat mypath/log
+      run: cat mypath/results
 
-#    - name: check result
-#      run: |
-#        echo "result = "
-#        if $result
-#        then
-#          echo  $result
-#        else
-#          echo "result is empty"
-#          fi
-
-    - name: check if still running
-      run: docker ps
 
 
 
