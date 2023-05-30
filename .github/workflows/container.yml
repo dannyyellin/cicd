@@ -5,15 +5,22 @@ on:
 jobs:
   job-name:
     runs-on: ubuntu-latest
+    env:
+      SECRET_USERNAME: ${{ secrets.DOCKER_COURSE_USERNAME }}
+
     services:
       wordcontainer:
         image: ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
 #        image: dannyteaching/wordsvr-v2:latest
         ports:
            - 8000:8000
+
     steps:
-    - name: check if running
+    - name: check if app is running
       run: docker ps
+
+    - name: Print Secret
+      run: echo $SECRET_USERNAME
 
     - name: create directory
       run: mkdir -p mypath
