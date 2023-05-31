@@ -1,7 +1,11 @@
 name: Pull and Test Image v2
+#on:
+#  repository_dispatch:
+#    types: time-to-test
 on:
-  repository_dispatch:
-    types: time-to-test
+  workflow_run:
+    workflows:
+      - time-to-test
 jobs:
   job-name:
     runs-on: ubuntu-latest
