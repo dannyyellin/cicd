@@ -6,12 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     services:
       wordcontainer:
-        image: username/wordsvr-v2:latest
+        image: wordsvr-v2:latest  #username/wordsvr-v2:latest
         credentials:
           username: ${{ secrets.DOCKER_COURSE_USERNAME }}
           password: ${{ secrets.DOCKER_COURSE_PASSWORD }}
         ports:
            - 8000:8000
+
 
     steps:
     - name: check if app is running
