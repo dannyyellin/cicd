@@ -1,14 +1,15 @@
 name: container
 on:
   push
-
 jobs:
   job-name:
     runs-on: ubuntu-latest
-
     services:
       wordcontainer:
-        image: dannyteaching/wordsvr-v2:latest
+        image: username/wordsvr-v2:latest
+        credentials:
+          username: ${{ secrets.DOCKER_COURSE_USERNAME }}
+          password: ${{ secrets.DOCKER_COURSE_PASSWORD }}
         ports:
            - 8000:8000
 
