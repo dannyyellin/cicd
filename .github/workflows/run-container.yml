@@ -5,24 +5,15 @@ jobs:
   job-name:
     runs-on: ubuntu-latest
     services:
-      environment:
-        USERNAME: {{ secrets.DOCKER_COURSE_USERNAME }}
       wordcontainer:
-        image: USERNAME/wordsvr-v2:latest
-        credentials:
-          username: ${{ secrets.DOCKER_COURSE_USERNAME }}
-          password: ${{ secrets.DOCKER_COURSE_PASSWORD }}
+        image: dannyteaching/wordsvr-v2:latest
         ports:
            - 8000:8000
-
-
     steps:
     - name: check if app is running
       run: docker ps
-
     - name: create directory
       run: mkdir -p mypath
-
     - name: curl
       run: |
         echo curl --location --request POST 'http://127.0.0.1:8000/words?word=wood' >> mypath/results
@@ -31,7 +22,6 @@ jobs:
         echo $(curl --location --request POST 'http://127.0.0.1:8000/words?word=silver') >> mypath/results
         echo curl --location --request GET 'http://127.0.0.1:8000/words' >> mypath/results
         echo $(curl --location --request GET 'http://127.0.0.1:8000/words') >> mypath/results
-
     - name: curl results
       run: cat mypath/results
 
