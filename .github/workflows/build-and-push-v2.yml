@@ -25,7 +25,11 @@ jobs:
         docker push \
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
     - name: dispatch event to test workload
-      uses: peter-evans/repository-dispatch@v2
+#      uses: peter-evans/repository-dispatch@v2
+#      with:
+#        event-type: time-to-test
+      uses: actions/checkout@v2
       with:
-        event-type: time-to-test
-
+        ref: ${{ github.event.workflow_run.head_commit.id }}
+        repository: ${{ github.event.repository.full_name }}
+        workflow: time-to-test
