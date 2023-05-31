@@ -6,10 +6,14 @@ jobs:
     runs-on: ubuntu-latest
     services:
       wordcontainer:
-        image: wordsvr-v2:latest  #username/wordsvr-v2:latest
-        credentials:
+        image: username/wordsvr-v2:latest
+        uses: docker/login-action@v2
+        with:
           username: ${{ secrets.DOCKER_COURSE_USERNAME }}
           password: ${{ secrets.DOCKER_COURSE_PASSWORD }}
+#        credentials:
+#          username: ${{ secrets.DOCKER_COURSE_USERNAME }}
+#          password: ${{ secrets.DOCKER_COURSE_PASSWORD }}
         ports:
            - 8000:8000
 
