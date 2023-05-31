@@ -1,4 +1,4 @@
-name: Pull and Test Docker Image
+name: Pull and Test Image v2
 on:
   repository_dispatch:
     types: time-to-test
