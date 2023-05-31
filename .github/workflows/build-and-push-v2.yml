@@ -26,11 +26,10 @@ jobs:
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
 
     - name: dispatch event to test workload
-      uses:
-        - peter-evans/repository-dispatch@v1
-        - with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          event-type: trigger-workflow2
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        event-type: trigger-workflow2
 
 #      - name: dispatch
 #      uses: actions/checkout@v2
