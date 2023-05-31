@@ -6,9 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     services:
       env:
-        username: {{ secrets.DOCKER_COURSE_USERNAME }}
+        USERNAME: {{ secrets.DOCKER_COURSE_USERNAME }}
       wordcontainer:
-        image: username/wordsvr-v2:latest
+        image: USERNAME/wordsvr-v2:latest
         credentials:
           username: ${{ secrets.DOCKER_COURSE_USERNAME }}
           password: ${{ secrets.DOCKER_COURSE_PASSWORD }}
