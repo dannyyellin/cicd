@@ -5,7 +5,7 @@ jobs:
   job-name:
     runs-on: ubuntu-latest
     services:
-      env:
+      environment:
         USERNAME: {{ secrets.DOCKER_COURSE_USERNAME }}
       wordcontainer:
         image: USERNAME/wordsvr-v2:latest
