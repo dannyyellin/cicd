@@ -1,4 +1,4 @@
-name: container
+name: run container v2
 on:
   push
 jobs:
