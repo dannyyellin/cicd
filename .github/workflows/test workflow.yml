@@ -1,0 +1,17 @@
+name: test-workflow
+on:
+  manual
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: dispatch event to test workload
+#      uses: peter-evans/repository-dispatch@v1
+#      with:
+#        token: ${{ secrets.GITHUB_TOKEN }}
+#        event-type: trigger-workflow2
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.workflow_run.head_commit.id }}
+        repository: ${{ github.event.repository.full_name }}
+        workflow: Pull-and-test-image
