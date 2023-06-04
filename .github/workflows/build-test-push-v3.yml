@@ -22,6 +22,9 @@ jobs:
         docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2 \
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
         pwd
+        ls
+        cd ..
+        ls
   test:
     runs-on: ubuntu-latest
     services:
