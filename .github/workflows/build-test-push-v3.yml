@@ -49,7 +49,8 @@ jobs:
   #        ruff --format=github --target-version=py37 .
       - name: Test with pytest
         run: |
-          pytest pytest-code/tests.py > test_results.txt
+          cd pytest-code
+          pytest -q tests.py > test_results.txt
           cat test_results.txt
       - name: Push to Docker Hub
         run: |
