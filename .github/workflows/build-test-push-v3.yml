@@ -21,8 +21,6 @@ jobs:
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
         docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2 \
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
-        cd pytest-code
-        ls
 
   test:
     runs-on: ubuntu-latest
@@ -49,14 +47,12 @@ jobs:
   #        ruff --format=github --select=E9,F63,F7,F82 --target-version=py37 .
   #        # default set of ruff rules with GitHub Annotations
   #        ruff --format=github --target-version=py37 .
-      - name: Test with pytest test
-        run: |
-          pwd
-          ls
       - name: Test with pytest
         run: |
           ls
           cd pytest-code
+          ls
+          which pytest
           pytest -q tests.py > test_results.txt
           cat test_results.txt
       - name: Push to Docker Hub
