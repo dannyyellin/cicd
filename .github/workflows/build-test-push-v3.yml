@@ -21,6 +21,8 @@ jobs:
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
         docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2 \
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
+    - name: start up the container just built
+      run: docker run -p8000:8000 ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
     - name: Set up Python
       uses: actions/setup-python@v4
     - name: Install dependencies
