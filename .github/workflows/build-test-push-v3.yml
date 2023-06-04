@@ -23,7 +23,6 @@ jobs:
         docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2 \
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
 
-    - name: test docker image
 
     - name: Set up Python
       uses: actions/setup-python@v4
