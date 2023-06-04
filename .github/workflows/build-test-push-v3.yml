@@ -47,10 +47,11 @@ jobs:
   #        ruff --format=github --select=E9,F63,F7,F82 --target-version=py37 .
   #        # default set of ruff rules with GitHub Annotations
   #        ruff --format=github --target-version=py37 .
-      - name: Test with pytest
+      - name: Test with pytest test
         run: |
           pwd
           ls
+      - name: Test with pytest
         run: |
           cd pytest-code
           pytest -q tests.py > test_results.txt
