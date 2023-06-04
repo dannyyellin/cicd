@@ -106,8 +106,8 @@ class Words(Resource):
         sys.stdout.flush()
         key = col.insertWord(w)
         if key == 0:   # word already exists
-            return key, 400
-        return key, 200
+            return key, 422
+        return key, 201
 
     # GET returns all the words in the collection in json
     def get(self):
