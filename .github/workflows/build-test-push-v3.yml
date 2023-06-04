@@ -51,6 +51,8 @@ jobs:
         run: |
           cd pytest-code
           pytest -q tests.py > test_results.txt
+      - name: post pytest
+        run: |
           docker ps
           cat test_results.txt
       - name: Push to Docker Hub
