@@ -3,7 +3,7 @@ name: Pull-and-test-image
 on:
   workflow_run:
     workflows:
-      - test-workflow
+      - test_workflow
 jobs:
   job-name:
     runs-on: ubuntu-latest
