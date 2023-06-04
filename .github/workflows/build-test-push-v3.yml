@@ -1,8 +1,7 @@
-name: build-and-push-v2
+name: build-and-push-v3
 on:
   push:
-      branches: [ master ]
-
+#      branches: [ master ]
 jobs:
   build:
     runs-on: ubuntu-latest
