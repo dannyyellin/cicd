@@ -1,4 +1,4 @@
-name: Build-and-push-v2
+name: build-and-push-v2
 on: push
 jobs:
   build:
@@ -34,8 +34,8 @@ jobs:
       with:
         ref: ${{ github.event.workflow_run.head_commit.id }}
         repository: ${{ github.event.repository.full_name }}
-        # workflow: run-container-v2.yml
-        workflow: Pull-and-test-image-v2
+        # workflow: pull-and-test-image-v2.yml
+        workflow: pull-and-test-image-v2
 
 
 #      - name: dispatch

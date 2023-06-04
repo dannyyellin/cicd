@@ -1,8 +1,8 @@
-name: Pull-and-test-image-v2
+name: pull-and-test-image-v2
 
 on:
   workflow_run:
-    workflows: Build-and-push-v2
+    workflows: build-and-push-v2
 
 jobs:
   job-name:
