@@ -53,6 +53,7 @@ jobs:
           ls
       - name: Test with pytest
         run: |
+          ls
           cd pytest-code
           pytest -q tests.py > test_results.txt
           cat test_results.txt
