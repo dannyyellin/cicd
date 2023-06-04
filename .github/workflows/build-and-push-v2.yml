@@ -25,23 +25,11 @@ jobs:
         docker push \
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
 
-    - name: dispatch event to test workload
-#      uses: peter-evans/repository-dispatch@v1
-#      with:
-#        token: ${{ secrets.GITHUB_TOKEN }}
-#        event-type: trigger-workflow2
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ github.event.workflow_run.head_commit.id }}
-        repository: ${{ github.event.repository.full_name }}
-        # workflow: pull-and-test-image-v2.yml
-        workflow: pull-and-test-image-v2
-
-
-#      - name: dispatch
+#    - name: dispatch event to test workload
 #      uses: actions/checkout@v2
 #      with:
 #        ref: ${{ github.event.workflow_run.head_commit.id }}
 #        repository: ${{ github.event.repository.full_name }}
-#        workflow: time-to-test
+#        workflow: pull-and-test-image-v2
+
 
