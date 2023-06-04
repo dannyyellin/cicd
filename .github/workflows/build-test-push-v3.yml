@@ -49,6 +49,9 @@ jobs:
   #        ruff --format=github --target-version=py37 .
       - name: Test with pytest
         run: |
+          pwd
+          ls
+        run: |
           cd pytest-code
           pytest -q tests.py > test_results.txt
           cat test_results.txt
