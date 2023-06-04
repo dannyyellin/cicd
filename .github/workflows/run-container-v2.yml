@@ -1,8 +1,8 @@
-name: Pull-and-test-image
+name: Pull-and-test-image-v2
 
 on:
   workflow_run:
-    workflows: Build and Push v2
+    workflows: Build-and-push-v2
 
 jobs:
   job-name:
@@ -23,6 +23,8 @@ jobs:
         echo $(curl --location --request POST 'http://127.0.0.1:8000/words?word=wood') >> mypath/results
         echo curl --location --request POST 'http://127.0.0.1:8000/words?word=silver' >> mypath/results
         echo $(curl --location --request POST 'http://127.0.0.1:8000/words?word=silver') >> mypath/results
+        echo curl --location --request POST 'http://127.0.0.1:8000/words?word=throw' >> mypath/results
+        echo $(curl --location --request POST 'http://127.0.0.1:8000/words?word=throw') >> mypath/results
         echo curl --location --request GET 'http://127.0.0.1:8000/words' >> mypath/results
         echo $(curl --location --request GET 'http://127.0.0.1:8000/words') >> mypath/results
     - name: curl results
