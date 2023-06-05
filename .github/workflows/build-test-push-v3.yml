@@ -24,29 +24,20 @@ jobs:
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
         docker push \
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
-#  test:
-#    needs: build
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: Checkout
-#      uses: /actions/checkout@v3
-#    - name: run image from previous job
-#      run: |
-#        docker run -d -p 8000:8000 dannyteaching/wordsvr-v2:latest
-#        echo hello
-#    - name: check if app is running
-#      run: docker ps
-#    services:
-#      wordcontainer:
-#        image: wordsvr-v2:latest # jobs.build-id.container.wordsvr-v2:latest  # jobs.<job_id>.container.image
-#        ports:
-#          - 8000:8000
-#      with:
-#        docker login localhost:8080
-#    steps:
-#      - name: Check-image-running
-#        run: docker ps
-#
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    services:
+      wordcontainer:
+        image: wordsvr-v2:latest # jobs.build-id.container.wordsvr-v2:latest  # jobs.<job_id>.container.image
+        ports:
+          - 8000:8000
+      with:
+        docker login localhost:8080
+    steps:
+      - name: Check-image-running
+        run: docker ps
+
 #      ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
 #    - name: Log in to Docker Hub
 #      uses: docker/login-action@v2
