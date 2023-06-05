@@ -23,7 +23,7 @@ jobs:
     -name: run image
     run: |
 #    Retrieve the Docker image name from the previous job's outputs
-      image_name = ${{ needs.build.outputs.image-name }}
+      image_name = $(/bin/bash -c "echo \${{ needs.build.outputs.image-name }}") # ${{ needs.build.outputs.image-name }}
       docker run -d -p 8000:8000 $image_name
     - name: check if app is running
       run: docker ps
