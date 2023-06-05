@@ -28,13 +28,13 @@ jobs:
       with:
         name: wordsvr-v2:latest
         path: /images
-    -name: run image
-    run: |
+#    -name: run image
+#    run: |
 #    Retrieve the Docker image name from the previous job's outputs
-      # image_name = $(/bin/bash -c "echo \${{ needs.build.outputs.image-name }}") # ${{ needs.build.outputs.image-name }}
-      docker run -d -p 8000:8000 wordsvr-v2:latest # $image_name
-    - name: check if app is running
-      run: docker ps
+#      # image_name = $(/bin/bash -c "echo \${{ needs.build.outputs.image-name }}") # ${{ needs.build.outputs.image-name }}
+#      docker run -d -p 8000:8000 wordsvr-v2:latest # $image_name
+#    - name: check if app is running
+#      run: docker ps
 #    services:
 #      wordcontainer:
 #        image: wordsvr-v2:latest # jobs.build-id.container.wordsvr-v2:latest  # jobs.<job_id>.container.image
@@ -82,13 +82,13 @@ jobs:
 #          pip install requests
 #          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 #       -
-  #    - name: Lint with ruff
-  #      run: |
-  #        # stop the build if there are Python syntax errors or undefined names
-  #        ruff --format=github --select=E9,F63,F7,F82 --target-version=py37 .
-  #        # default set of ruff rules with GitHub Annotations
-  #        ruff --format=github --target-version=py37 .
-
+#      - name: Lint with ruff
+#        run: |
+#          # stop the build if there are Python syntax errors or undefined names
+#          ruff --format=github --select=E9,F63,F7,F82 --target-version=py37 .
+#          # default set of ruff rules with GitHub Annotations
+#          ruff --format=github --target-version=py37 .
+#
 #      - name: Test with pytest
 #        if: always()
 #        run: |
