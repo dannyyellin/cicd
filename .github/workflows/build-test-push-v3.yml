@@ -59,7 +59,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: GH_test-results
-          path: /pytest-code
+          path: pytest-code
 
       - name: post pytest
         if: always()
