@@ -12,11 +12,10 @@ jobs:
       id: build-id
       run: docker build . --file Dockerfile.setport --tag wordsvr-v2:latest
     - name: upload artifact
-      uses:
-        uses: actions/upload-artifact@v2
-        with:
-          name: wordsvr-v2:latest
-          path: /images
+      uses: actions/upload-artifact@v2
+      with:
+        name: wordsvr-v2:latest
+        path: /images
 
   test:
     needs: build
