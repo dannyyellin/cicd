@@ -51,4 +51,4 @@ jobs:
           pytest -v test_word.py > GH_test_results.txt
       - name: view results of test
         if: always()
-          cat GH_test_results.txt
+        run: cat GH_test_results.txt
