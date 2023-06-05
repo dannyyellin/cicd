@@ -19,6 +19,8 @@ def test_insert_word1():
     print(response.text)
     print("response.json() =")
     print(response.json())
+    print("response.status_code =")
+    print(str(response.status_code))
     sys.stdout.flush()
     assert_valid_added_resource(response)
     word_collection[response.json()] = "house"
