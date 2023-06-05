@@ -23,7 +23,6 @@ jobs:
     - name: Load Docker images from previous workflows
       run: |
         image_name=$(/bin/bash -c "echo \${{ needs.build.outputs.image-name }}")
-        echo "image_name = "
         echo $image_name
         docker run -d -p 8000:8000 $image-name
     - name: Check-image-running
