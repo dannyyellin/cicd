@@ -53,7 +53,7 @@ jobs:
           cd pytest-code
           pytest -q tests.py > GH_test_results.txt
           echo "directory is"
-          echo pwd
+          echo $(pwd)
       - name: Archive Rest Results
         if: always()
         uses: actions/upload-artifact@v1
@@ -65,7 +65,7 @@ jobs:
         if: always()
         run: |
           echo "directory is"
-          echo pwd
+          echo $(pwd)
           docker ps
           cat GH_test_results.txt
 
