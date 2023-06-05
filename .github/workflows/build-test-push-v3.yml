@@ -27,7 +27,6 @@ jobs:
 ##       push the tagged image also
 #        docker push \
 #        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
-
   test:
     needs: build
     runs-on: ubuntu-latest
@@ -37,6 +36,7 @@ jobs:
     - name: run image from previous job
       run: |
         docker run -d -p 8000:8000 dannyteaching/wordsvr-v2:latest
+        echo hello
     - name: check if app is running
       run: docker ps
 #    services:
