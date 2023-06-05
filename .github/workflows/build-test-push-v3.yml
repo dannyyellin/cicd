@@ -17,17 +17,16 @@ jobs:
       run: echo "DATE=$(date -I)" >> $GITHUB_ENV
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile.setport --tag \
-        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
+        docker build . --file Dockerfile.setport --tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
     - name: Push to Docker Hub
       run: |
         docker push ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
 #       tag the image with date
-        docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2 \
-        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
-#       push the tagged image also
-        docker push \
-        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
+#        docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2 \
+#        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
+##       push the tagged image also
+#        docker push \
+#        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
 
   test:
     needs: build
