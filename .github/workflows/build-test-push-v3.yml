@@ -21,8 +21,8 @@ jobs:
       run: |
         docker push ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
 #       tag the image with date
-#        docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2 \
-#        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
+        docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2 \
+        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
 ##       push the tagged image also
 #        docker push \
 #        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
