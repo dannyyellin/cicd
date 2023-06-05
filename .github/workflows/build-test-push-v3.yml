@@ -39,7 +39,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest requests # not using yet lint checker like ruff 
+          pip install pytest # not using yet lint checker like ruff 
+          pip install requests
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
   #    - name: Lint with ruff
   #      run: |
@@ -51,7 +52,7 @@ jobs:
         if: always()
         run: |
           cd pytest-code
-          pytest tests.py > GH_test_results.txt
+          pytest test_results.py > GH_test_results.txt
           echo "directory is"
           echo $(pwd)
       - name: Archive Rest Results
