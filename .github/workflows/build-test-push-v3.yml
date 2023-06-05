@@ -13,6 +13,7 @@ jobs:
       run: docker build . --file Dockerfile.setport --tag wordsvr-v2:latest
 
   test:
+    needs: build
     runs-on: ubuntu-latest
     services:
       wordcontainer:
