@@ -53,6 +53,8 @@ jobs:
         if: always()
         run: |
           echo directory is $(pwd)
+          echo $(ls)
+          ls
           cd pytest-code
           pytest -v test_word.py > GH_test_results.txt
           cat GH_test_results.txt
