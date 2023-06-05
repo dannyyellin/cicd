@@ -50,7 +50,7 @@ jobs:
           mkdir results
           cd pytest-code
           pytest -v test_word.py > ../results/test_results.txt
-          cat GH_test_results.txt
+#          cat GH_test_results.txt
       - name: upload test results
         uses: actions/upload-artifact@v3
         with:
