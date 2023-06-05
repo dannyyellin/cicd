@@ -1,3 +1,6 @@
+import string
+import sys
+
 import requests
 
 import connectionController
@@ -15,6 +18,9 @@ def assert_valid_added_resource(response: requests.Response):
     assert response.status_code == 201
     # should be positive ID
     VALID_RETURNED_RESOURCE_ID = 0
+    print("print(response.json()) > 0? response.json() =")
+    print(response.json())
+    sys.stdout.flush()
     assert response.json() > VALID_RETURNED_RESOURCE_ID
 
 

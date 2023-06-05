@@ -1,3 +1,5 @@
+import sys
+
 import connectionController
 from assertions import *
 
@@ -13,6 +15,11 @@ def test_words_empty():
 def test_insert_word1():
     word = "house"
     response = connectionController.http_post_qs("words",word)
+    print("response.text =")
+    print(response.text)
+    print("response.json() =")
+    print(response.json())
+    sys.stdout.flush()
     assert_valid_added_resource(response)
     word_collection[response.json()] = "house"
 
