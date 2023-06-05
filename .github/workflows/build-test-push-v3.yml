@@ -11,20 +11,33 @@ jobs:
     - name: Build-the-docker-image
       id: build-id
       run: docker build . --file Dockerfile.setport --tag wordsvr-v2:latest
+    - name: Set Docker image output
+      run: echo "::set-output name=image-name::wordsvr-v2:latest"
 
   test:
     needs: build
     runs-on: ubuntu-latest
-    services:
-      wordcontainer:
-        image: wordsvr-v2:latest # jobs.build-id.container.wordsvr-v2:latest  # jobs.<job_id>.container.image
-        ports:
-          - 8000:8000
-      with:
-        docker login localhost:8080
+
     steps:
-      - name: Check-image-running
-        run: docker ps
+    - name: Checkout
+    uses: /actions/checkout@v3
+    -name: run image
+    run: |
+#    Retrieve the Docker image name from the previous job's outputs
+      image_name = ${{ needs.build.outputs.image-name }}
+      docker run -d -p 8000:8000 $image_name
+    - name: check if app is running
+      run: docker ps
+#    services:
+#      wordcontainer:
+#        image: wordsvr-v2:latest # jobs.build-id.container.wordsvr-v2:latest  # jobs.<job_id>.container.image
+#        ports:
+#          - 8000:8000
+#      with:
+#        docker login localhost:8080
+#    steps:
+#      - name: Check-image-running
+#        run: docker ps
 #
 #      ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
 #    - name: Log in to Docker Hub
