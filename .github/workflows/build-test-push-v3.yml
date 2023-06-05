@@ -54,7 +54,7 @@ jobs:
           echo directory is
           echo $(pwd)
           cd pytest-code
-          pytest test_results.py > GH_test_results.txt
+          pytest test_word.py > GH_test_results.txt
           echo "directory is"
           echo $(pwd)
       - name: Archive Rest Results
