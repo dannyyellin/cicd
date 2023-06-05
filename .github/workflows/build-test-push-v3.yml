@@ -1,4 +1,4 @@
-name: build-and-push-v3
+name: build-test-push-v3
 on:
   push
 jobs:
@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       wordcontainer:
-        image: dannyteaching/wordsvr-v2:latest # jobs.build-id.container.wordsvr-v2:latest  # jobs.<job_id>.container.image
+        image: dannyteaching/wordsvr-v2:latest
         ports:
           - 8000:8000
     steps:
@@ -45,40 +45,10 @@ jobs:
           pip install pytest # not using yet lint checker like ruff
           pip install requests
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-#      - name: Lint with ruff
-#        run: |
-#          # stop the build if there are Python syntax errors or undefined names
-#          ruff --format=github --select=E9,F63,F7,F82 --target-version=py37 .
-#          # default set of ruff rules with GitHub Annotations
-#          ruff --format=github --target-version=py37 .
-      - name: Test with pytest
-        if: always()
+      - name: Test with pytest  # additionally use ruff or other lint checkers
         run: |
-          echo directory is $(pwd)
-          echo files and directories are $(ls)
           cd pytest-code
           pytest -v test_word.py > GH_test_results.txt
+      - name: view results of test
+        if: always()
           cat GH_test_results.txt
-#      - name: Archive Rest Results
-#        if: always()
-#        uses: actions/upload-artifact@v1
-#        with:
-#          name: GH_test-results
-#          path: pytest-code
-#
-#      - name: post pytest
-#        if: always()
-#        run: |
-#          echo "directory is"
-#          echo $(pwd)
-#          cd pytest-code
-#          echo "directory is"
-#          echo $(pwd)
-#          cat GH_test_results.txt
-#
-#      - name: Push to Docker Hub
-#        run: |
-#          docker push ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
-#          docker push \
-#          ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
-#

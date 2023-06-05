@@ -1,9 +1,7 @@
 name: pull-and-test-image-v2
-
 on:
   workflow_run:
     workflows: build-and-push-v2
-
 jobs:
   job-name: build
     runs-on: ubuntu-latest
