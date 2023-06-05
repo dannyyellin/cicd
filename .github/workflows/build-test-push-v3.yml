@@ -51,6 +51,8 @@ jobs:
       - name: Test with pytest
         if: always()
         run: |
+          echo directory is
+          echo $(pwd)
           cd pytest-code
           pytest test_results.py > GH_test_results.txt
           echo "directory is"
