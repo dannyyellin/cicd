@@ -11,20 +11,29 @@ jobs:
     - name: Build-the-docker-image
       id: build-id
       run: docker build . --file Dockerfile.setport --tag wordsvr-v2:latest
-    - name: Set Docker image output
-      run: echo "::set-output name=image-name::wordsvr-v2:latest"
+    - name: upload artifact
+      uses:
+        uses: actions/upload-artifact@v2
+        with:
+          name: wordsvr-v2:latest
+          path: /images
 
   test:
     needs: build
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-    uses: /actions/checkout@v3
+      uses: /actions/checkout@v3
+    - name: download artifact
+      uses: action/download-artifact@v2
+      with:
+        name: wordsvr-v2:latest
+        path: /images
     -name: run image
     run: |
 #    Retrieve the Docker image name from the previous job's outputs
-      image_name = $(/bin/bash -c "echo \${{ needs.build.outputs.image-name }}") # ${{ needs.build.outputs.image-name }}
-      docker run -d -p 8000:8000 $image_name
+      # image_name = $(/bin/bash -c "echo \${{ needs.build.outputs.image-name }}") # ${{ needs.build.outputs.image-name }}
+      docker run -d -p 8000:8000 wordsvr-v2:latest # $image_name
     - name: check if app is running
       run: docker ps
 #    services:
