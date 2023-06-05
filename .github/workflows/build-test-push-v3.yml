@@ -29,11 +29,9 @@ jobs:
     runs-on: ubuntu-latest
     services:
       wordcontainer:
-        image: wordsvr-v2:latest # jobs.build-id.container.wordsvr-v2:latest  # jobs.<job_id>.container.image
+        image: dannyteaching/wordsvr-v2:latest # jobs.build-id.container.wordsvr-v2:latest  # jobs.<job_id>.container.image
         ports:
           - 8000:8000
-      with:
-        docker login localhost:8080
     steps:
       - name: Check-image-running
         run: docker ps
