@@ -1,21 +1,33 @@
 name: build-and-push-v3
 on:
   push:
-#      branches: [ master ]
+      branches: [ master ]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: /actions/checkout@v3
-    - name: Build-the-docker-image
-      id: build-id
-      run: docker build . --file Dockerfile.setport --tag wordsvr-v2:latest
-    - name: upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/checkout@v3
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
       with:
-        name: wordsvr-v2:latest
-        path: /images
+          username: ${{ secrets.DOCKER_COURSE_USERNAME }}
+          password: ${{ secrets.DOCKER_COURSE_PASSWORD }}
+    - name: Set DATE
+      run: echo "DATE=$(date -I)" >> $GITHUB_ENV
+    - name: Build the Docker image
+      run: |
+        docker build . --file Dockerfile.setport --tag \
+        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
+    - name: Push to Docker Hub
+      run: |
+        docker push ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
+#       tag the image with date
+        docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2 \
+        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
+#       push the tagged image also
+        docker push \
+        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
 
   test:
     needs: build
@@ -23,25 +35,11 @@ jobs:
     steps:
     - name: Checkout
       uses: /actions/checkout@v3
-    - name: Download artifacts (Docker images) from previous workflows
-      uses: actions/download-artifact@v2
-    - name: Load Docker images from previous workflows
+    - name: run image from previous job
       run: |
-        docker load --input frontend-image/frontend-image.tar 
-      
-
-    - name: download artifact
-      uses: action/download-artifact@v2
-      with:
-        name: wordsvr-v2:latest
-        path: /images
-#    -name: run image
-#    run: |
-#    Retrieve the Docker image name from the previous job's outputs
-#      # image_name = $(/bin/bash -c "echo \${{ needs.build.outputs.image-name }}") # ${{ needs.build.outputs.image-name }}
-#      docker run -d -p 8000:8000 wordsvr-v2:latest # $image_name
-#    - name: check if app is running
-#      run: docker ps
+        docker run -d -p 8000:8000 wordsvr-v2:latest # $image_name
+    - name: check if app is running
+      run: docker ps
 #    services:
 #      wordcontainer:
 #        image: wordsvr-v2:latest # jobs.build-id.container.wordsvr-v2:latest  # jobs.<job_id>.container.image
