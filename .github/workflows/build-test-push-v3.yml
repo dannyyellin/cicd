@@ -51,7 +51,8 @@ jobs:
         if: always()
         run: |
           cd pytest-code
-          pytest -q tests.py > GH_test_results.txt
+          pytest -v  > GH_test_results.txt
+#         by default uses files test_*.py or *_test.py in current directory
           echo "directory is"
           echo $(pwd)
       - name: Archive Rest Results
