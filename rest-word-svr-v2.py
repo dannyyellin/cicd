@@ -95,8 +95,12 @@ class Words(Resource):
 
     # POST adds a word to /words and returns its key.
     def post(self):
+        print("post: before reqparse")
+        sys.stdout.flush()
         # get argument being passed in query string
         parser = reqparse.RequestParser()  # initialize parse
+        print("post: after reqparse")
+        sys.stdout.flush()
         # in the query_string, expect "?word=w" where w is the word to be added
         parser.add_argument('word', location='args', required=True)  # location='args' is required, at least on macOS
         args = parser.parse_args()  # parse arguments into a dictionary structure
