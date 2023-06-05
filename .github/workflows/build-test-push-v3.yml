@@ -50,7 +50,7 @@ jobs:
       - name: Test with pytest
         run: |
           cd pytest-code
-          pytest -q tests.py
+          pytest -fAe tests.py
 #           > test_results.txt
       - name: post pytest
         run: |
