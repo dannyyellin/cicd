@@ -7,11 +7,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
-    - name: Build the Docker image
-      run:
-        - docker build . --file Dockerfile.setport --tag wordsvr-v2
-#
+      uses: /actions/checkout@v3
+    - name: Build-the-docker-image
+      run: docker build . --file Dockerfile.setport --tag wordsvr-v2
+  test:
+    runs-on: ubuntu-latest
+    services:
+      wordcontainer:
+        image: wordsvr-v2
+        ports:
+          - 8000:8000
+    steps:
+      - name: Check-image-running
+        run: docker ps
 #
 #      ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
 #    - name: Log in to Docker Hub
@@ -48,7 +56,7 @@ jobs:
 #          pip install pytest # not using yet lint checker like ruff
 #          pip install requests
 #          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        -
+#       -
   #    - name: Lint with ruff
   #      run: |
   #        # stop the build if there are Python syntax errors or undefined names
@@ -81,7 +89,7 @@ jobs:
 #          echo "directory is"
 #          echo $(pwd)
 #          cat GH_test_results.txt
-
+#
 #      - name: Push to Docker Hub
 #        run: |
 #          docker push ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
