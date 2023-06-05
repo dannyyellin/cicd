@@ -66,7 +66,9 @@ jobs:
         run: |
           echo "directory is"
           echo $(pwd)
-          docker ps
+          cd pytest-code
+          echo "directory is"
+          echo $(pwd)
           cat GH_test_results.txt
 
       - name: Push to Docker Hub
