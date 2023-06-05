@@ -111,6 +111,8 @@ class Words(Resource):
         key = col.insertWord(w)
         if key == 0:   # word already exists
             return key, 422
+        print("returning 201")
+        sys.stdout.flush()
         return key, 201
 
     # GET returns all the words in the collection in json
