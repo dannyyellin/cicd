@@ -37,7 +37,7 @@ jobs:
         name: wordsvr
         path: $HOME
     - name: run image in container
-      run: docker run -p8000:8000 wordsvr
+      run: docker run -p8000:8000 $HOME/wordsvr
     - name: check container is running
       run: docker ps
 #      - name: Check-image-running
