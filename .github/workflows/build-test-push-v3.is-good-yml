@@ -49,6 +49,9 @@ jobs:
         run: |
           cd pytest-code
           pytest -v test_word.py > test_results.txt
+#      - name: if successful, load new image to DockerHub
+#        if: success()
+#        ...
       - name: upload test results
         if: always()  # always perform this step even if tests fail, to see results
         uses: actions/upload-artifact@v3

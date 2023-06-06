@@ -1,7 +1,9 @@
 name: pull-and-test-image-v2
 on:
   workflow_run:
-    workflows: build-and-push-v2
+    workflows: ["build-and-push-v2"]
+    types:
+      - completed  # see https://stackoverflow.com/questions/62750603/github-actions-trigger-another-action-after-one-action-is-completed/62772822#62772822
 jobs:
   job-name: build
     runs-on: ubuntu-latest

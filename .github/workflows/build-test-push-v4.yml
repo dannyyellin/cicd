@@ -1,0 +1,70 @@
+name: build-test-push-v4
+on:
+  push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Build and export
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile.setport
+        tags: name/wordsvr:latest
+        outputs: type=oci,dest=/tmp/image.tar
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+      name: wordsvr
+      path: /tmp/image.tar
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    services:
+      wordcontainer:
+        image: /tmp/image.tar
+        ports:
+          - 8000:8000
+#    steps:
+#      - name: Check-image-running
+#        run: docker ps
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#      - name: Set up Python
+#        uses: actions/setup-python@v4
+#      - name: Install dependencies
+#        run: |
+#          python -m pip install --upgrade pip
+#          pip install pytest # not using yet lint checker like ruff
+#          pip install requests
+#          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+#      - name: Test with pytest  # additionally use ruff or other lint checkers
+#        run: |
+#          cd pytest-code
+#          pytest -v test_word.py > test_results.txt
+##      - name: if successful, load new image to DockerHub
+##        if: success()
+##        ...
+#      - name: upload test results
+#        if: always()  # always perform this step even if tests fail, to see results
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: GH_test_results
+#          path: pytest-code/test_results.txt
+##    - name: Set DATE
+##      run: echo "DATE=$(date -I)" >> $GITHUB_ENV
+##    - name: Push to Docker Hub
+##      run: |
+##        docker push ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
+##        docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2 \
+##        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
+##        docker push \
+##        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
