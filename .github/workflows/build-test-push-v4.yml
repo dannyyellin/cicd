@@ -68,7 +68,11 @@ jobs:
     - name: tag images for DockHub
       run: |
         docker image ls
-        docker tag wordsvr/image.tar ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
+        echo $(pwd)
+        docker $(ls)
+        echo $pwd
+        echo $ls
+        docker tag wordsvr ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
 #      - name: Push to Docker Hub
 #        run: |
 #          docker push ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
