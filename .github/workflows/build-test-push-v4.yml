@@ -62,7 +62,6 @@ jobs:
 #     The following steps will only execute if tests succeeded
     - name: Set DATE
       run: echo "DATE=$(date -I)" >> $GITHUB_ENV
-    - name: if tests were successful, push to DockerHub
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
       with:
