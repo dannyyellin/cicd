@@ -7,18 +7,15 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
-
     - name: Build and export
       uses: docker/build-push-action@v3
       with:
         context: .
         file: ./Dockerfile.setport
-        tags: wordsvr:latest  # name/wordsvr:latest
+        tags: wordsvr:latest, dannyteaching/wordsvr:latest
         outputs: type=docker,dest=/tmp/image.tar
-
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
@@ -69,7 +66,7 @@ jobs:
       run: |
         docker image ls
         echo $(pwd)
-        docker $(ls)
+        echo $(ls)
         echo $pwd
         echo $ls
         docker tag wordsvr ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
