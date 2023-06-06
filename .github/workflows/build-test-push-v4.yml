@@ -23,7 +23,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: wordsvr
-        path: /tmp/image.tar
+        path: $HOME
 
   test:
     needs: build
@@ -35,7 +35,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: wordsvr
-        path: ./tmp/image.tar
+        path: $HOME
     - name: run image in container
       run: docker run -p8000:8000 wordsvr
     - name: check container is running
