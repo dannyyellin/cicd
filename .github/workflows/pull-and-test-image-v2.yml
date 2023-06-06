@@ -3,9 +3,9 @@ on:
   workflow_run:
     workflows: ["build-and-push-v2"]
     types:
-      - completed  # see https://stackoverflow.com/questions/62750603/github-actions-trigger-another-action-after-one-action-is-completed/62772822#62772822
+      - completed
 jobs:
-  job-name: build
+  execute:
     runs-on: ubuntu-latest
     services:
       wordcontainer:
@@ -31,3 +31,5 @@ jobs:
         echo $(curl --location --request GET 'http://127.0.0.1:8000/words') >> mypath/results
     - name: curl results
       run: cat mypath/results
+#    regarding workflow_run:
+#    https://stackoverflow.com/questions/62750603/github-actions-trigger-another-action-after-one-action-is-completed/62772822#62772822
