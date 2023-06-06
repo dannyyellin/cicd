@@ -17,13 +17,13 @@ jobs:
         context: .
         file: ./Dockerfile.setport
         tags: wordsvr:latest  # name/wordsvr:latest
-        outputs: type=oci,dest=tmp/image.tar
+        outputs: type=oci,dest=/tmp/image.tar
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: wordsvr
-        path: tmp/image.tar
+        path: /tmp/image.tar
 
   test:
     needs: build
@@ -35,7 +35,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: wordsvr
-        path: tmp/image.tar
+        path: /tmp/image.tar
     - name: run image in container
       run: docker run -p8000:8000 wordsvr
     - name: check container is running
