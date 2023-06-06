@@ -22,8 +22,8 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-      name: wordsvr
-      path: /tmp/image.tar
+        name: wordsvr
+        path: /tmp/image.tar
 
   test:
     needs: build
