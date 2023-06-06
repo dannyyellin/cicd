@@ -29,6 +29,8 @@ jobs:
 #    1. download image and run it in a container
     - name: Download artifact
       uses: actions/download-artifact@v3
+      with:
+        name: wordsvr:latest, dannyteaching/wordsvr:latest
     - name: Load Docker images from previous workflows
       run: docker load --input wordsvr/image.tar
     - name: check wordsvr image is loaded
