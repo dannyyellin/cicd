@@ -1,7 +1,6 @@
 name: build-and-push-v2
 on:
   push:
-      branches: [ master ]
 jobs:
   build:
     runs-on: ubuntu-latest
