@@ -14,7 +14,7 @@ jobs:
       with:
         context: .
         file: ./Dockerfile.setport
-        tags: wordsvr:latest, dannyteaching/wordsvr:latest
+        tags: wordsvr-v2:latest, dannyteaching/wordsvr-v2:latest
         outputs: type=docker,dest=/tmp/image.tar
     - name: Upload artifact
       uses: actions/upload-artifact@v3
@@ -34,7 +34,7 @@ jobs:
     - name: check wordsvr image is loaded
       run: docker image ls
     - name: run image in container
-      run: docker run -p8000:8000 wordsvr &
+      run: docker run -p8000:8000 wordsvr-v2 &
     - name: Check container is running
       run: docker ps
 #     2. set up python and pytest environment
