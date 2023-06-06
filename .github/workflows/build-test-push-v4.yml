@@ -33,7 +33,8 @@ jobs:
         image: /tmp/image.tar
         ports:
           - 8000:8000
-#    steps:
+    steps:
+      - run: echo hi
 #      - name: Check-image-running
 #        run: docker ps
 #      - name: Checkout
