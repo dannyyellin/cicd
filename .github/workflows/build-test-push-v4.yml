@@ -14,7 +14,7 @@ jobs:
       with:
         context: .
         file: ./Dockerfile.setport
-        tags: wordsvr-v2:latest, dannyteaching/wordsvr-v2:latest
+        tags: wordsvr-v2:latest, ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
         outputs: type=docker,dest=/tmp/image.tar
     - name: Upload artifact
       uses: actions/upload-artifact@v3
