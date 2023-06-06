@@ -37,7 +37,7 @@ jobs:
         name: wordsvr
         path: ./tmp/image.tar
     - name: run image in container
-      run: docker run -p8000:8000 /tmp/image.tar
+      run: docker run -p8000:8000 wordsvr
     - name: check container is running
       run: docker ps
 #      - name: Check-image-running
