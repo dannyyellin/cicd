@@ -67,9 +67,10 @@ jobs:
         docker image ls
         echo $(pwd)
         echo $(ls)
-        echo $pwd
-        echo $ls
+        cd /home/runner
+        ls
         docker tag wordsvr ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
+        docker images
 #      - name: Push to Docker Hub
 #        run: |
 #          docker push ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
