@@ -25,7 +25,7 @@ jobs:
         name: wordsvr
         path: /tmp/image.tar
 
-  test:
+  execute:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -33,49 +33,47 @@ jobs:
       run: echo hello
     - name: Download artifact
       uses: actions/download-artifact@v3
-#      with:
-#        name: wordsvr
-#        path: /tmp/image.tar
     - name: Load Docker images from previous workflows
-      run: |
-        docker load --input wordsvr/image.tar 
+      run: docker load --input wordsvr/image.tar
     - name: check wordsvr image is loaded
       run: docker image ls
     - name: run image in container
       run: docker run -p8000:8000 wordsvr &
     - name: check container is running
       run: docker ps
-#      - name: Check-image-running
-#        run: docker ps
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#      - name: Set up Python
-#        uses: actions/setup-python@v4
-#      - name: Install dependencies
+  test:
+    needs: execute
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check-image-running
+        run: docker ps
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest # not using yet lint checker like ruff
+          pip install requests
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Test with pytest  # additionally use ruff or other lint checkers
+        run: |
+          cd pytest-code
+          pytest -v test_word.py > test_results.txt
+      - name: upload test results
+        if: always()  # always perform this step even if tests fail, to see results
+        uses: actions/upload-artifact@v3
+        with:
+          name: GH_test_results
+          path: pytest-code/test_results.txt
+##     The following steps will only execute if tests succeeded
+#      - name: Set DATE
+#        run: echo "DATE=$(date -I)" >> $GITHUB_ENV
+#      - name: Push to Docker Hub
 #        run: |
-#          python -m pip install --upgrade pip
-#          pip install pytest # not using yet lint checker like ruff
-#          pip install requests
-#          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-#      - name: Test with pytest  # additionally use ruff or other lint checkers
-#        run: |
-#          cd pytest-code
-#          pytest -v test_word.py > test_results.txt
-##      - name: if successful, load new image to DockerHub
-##        if: success()
-##        ...
-#      - name: upload test results
-#        if: always()  # always perform this step even if tests fail, to see results
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: GH_test_results
-#          path: pytest-code/test_results.txt
-##    - name: Set DATE
-##      run: echo "DATE=$(date -I)" >> $GITHUB_ENV
-##    - name: Push to Docker Hub
-##      run: |
-##        docker push ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
-##        docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2 \
-##        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
-##        docker push \
-##        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
+#          docker push ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
+#          docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2 \
+#          ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
+#          docker push \
+#          ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
