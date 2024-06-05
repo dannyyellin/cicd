@@ -7,8 +7,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - name test
-      run echo Testing build-test-push-v4
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
     - name: Build and export
