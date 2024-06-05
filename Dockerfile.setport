@@ -4,6 +4,7 @@ WORKDIR ./app
 RUN pip install flask
 RUN pip install flask_restful
 COPY rest-word-svr-v2.py .
+RUN echo "testing" > test
 EXPOSE 8000
 ENV FLASK_APP=rest-word-svr-v2.py
 ENV FLASK_RUN_PORT=8000
