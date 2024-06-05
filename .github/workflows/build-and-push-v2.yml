@@ -25,7 +25,6 @@ jobs:
         docker push ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2
         docker push \
         ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
-        echo "Finishing"
 
 #    - name: dispatch event to test workload
 #      uses: actions/checkout@v2
