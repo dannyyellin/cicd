@@ -1,6 +1,6 @@
 name: build-and-push-v2
 on:
-  push:
+  push: 
 jobs:
   build:
     runs-on: ubuntu-latest
