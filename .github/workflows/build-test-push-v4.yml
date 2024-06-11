@@ -8,16 +8,16 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
     - name: Build and export
-      uses: docker/build-push-action@v3
+      uses: docker/build-push-action@v5
       with:
         context: .
         file: ./Dockerfile.setport
         tags: wordsvr-v2:latest, ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:latest
         outputs: type=docker,dest=/tmp/image.tar
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: wordsvr
         path: /tmp/image.tar
@@ -27,7 +27,7 @@ jobs:
     steps:
 #    # 1. download image and run it in a container
     - name: Download artifact
-      uses: actions/download-artifact@v3  # downloads all artifacts
+      uses: actions/download-artifact@v4  # downloads all artifacts
     - name: Load Docker images from previous workflows
       run: docker load --input wordsvr/image.tar
     - name: check wordsvr image is loaded
@@ -38,7 +38,7 @@ jobs:
       run: docker ps
 #    # 2. set up python and pytest environment
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v4
     - name: Install dependencies
@@ -54,7 +54,7 @@ jobs:
         pytest -v test_word.py > test_results.txt
     - name: upload test results
       if: always()  # always perform this step even if tests fail, to see results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: GH_test_results
         path: pytest-code/test_results.txt
