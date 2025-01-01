@@ -1,0 +1,30 @@
+name: Build and push Docker image
+on:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+          username: ${{ secrets.DOCKER_COURSE_USERNAME }}
+          password: ${{ secrets.DOCKER_COURSE_PASSWORD }}
+    - name: Set DATE
+      run: echo "DATE=$(date -I)" >> $GITHUB_ENV
+    - name: Build the Docker image
+      run: |
+        docker build . --file Dockerfile.toys --tag \
+        ${{ secrets.DOCKER_COURSE_USERNAME }}/toys
+        docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/toys \
+        ${{ secrets.DOCKER_COURSE_USERNAME }}/toys:${{ env.DATE }}
+    - name: Push to Docker Hub
+      run: |
+        docker push ${{ secrets.DOCKER_COURSE_USERNAME }}/toys
+        docker push \
+        ${{ secrets.DOCKER_COURSE_USERNAME }}/toys:${{ env.DATE }}
+
+
+

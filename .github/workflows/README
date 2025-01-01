@@ -16,4 +16,9 @@ All the workflows involve the very simple rest-word-svr python program, which is
     are successful, it pushes the image to DockerHub.   It actually pushes the image tagged with "latest" and tagged
     with <date>.
 
+UPDATES Jan 1, 2025
+5.  build-and-push-simple.yml     This is mostly the same as build-and-push with updates to version numbers of GitHub
+    actions and using toys REST program example instead of word server.
+
+
 
