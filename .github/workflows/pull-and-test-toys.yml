@@ -13,15 +13,13 @@ jobs:
         ports:
            - 8000:80
     steps:
-    - name: check if app is running
-      run: docker ps
-    - name: fake test
-      run: ls
-    # - name: create directory
-    #   run: mkdir mypath
-    - name: curl
-      run: |
-        echo curl --location --request POST 'http://0.0.0.0:8001/toys' \
+      - name: check if app is running
+        run: docker ps
+      - name: create directory
+        run: mkdir mypath
+      - name: curl
+        run: |
+          echo curl --location --request POST 'http://0.0.0.0:8001/toys' \
               --header 'Content-Type: application/json' \
               --data '{
                 "name": "blocks",
@@ -29,7 +27,7 @@ jobs:
                 "age": 3,
                 "price": 18.00
               }' >> mypath/results
-        echo $(curl --location --request POST 'http://0.0.0.0:8001/toys' \
+          echo $(curl --location --request POST 'http://0.0.0.0:8001/toys' \
               --header 'Content-Type: application/json' \
               --data '{
                 "name": "blocks",
@@ -45,8 +43,8 @@ jobs:
 #        echo curl --location --request POST 'http://127.0.0.1:8000/toys?word=coffee' >> mypath/results
 #        echo $(curl --location --request POST 'http://127.0.0.1:8000/toys?word=coffee') >> mypath/results
         echo curl --location --request GET 'http://127.0.0.1:8000/toys' >> mypath/results
-        echo $(curl --location --request GET 'http://127.0.0.1:8000/toys') >> mypath/results
-    - name: curl results
-      run: cat mypath/results
+          echo $(curl --location --request GET 'http://127.0.0.1:8000/toys') >> mypath/results
+      - name: curl results
+        run: cat mypath/results
 #    regarding workflow_run:
 #    https://stackoverflow.com/questions/62750603/github-actions-trigger-another-action-after-one-action-is-completed/62772822#62772822
