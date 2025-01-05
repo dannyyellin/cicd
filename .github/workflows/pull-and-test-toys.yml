@@ -18,12 +18,8 @@ jobs:
         run: docker ps
       - name: Get container logs
         run: docker logs $(docker ps -q -f name=toyscontainer)
-      - name: Get container logs
-        run: docker logs $(docker ps -q -f name=toyscontainer)
       - name: create directory
         run: mkdir mypath
-      - name: testing123
-        run: ls
       - name: curl tests
         run: |
           echo curl --location --request POST 'http://0.0.0.0:8001/toys' \
