@@ -15,9 +15,9 @@ jobs:
     steps:
       - name: Check if app is running
         run: docker ps
-      - name: Create directory
+      - name: create directory
         run: mkdir mypath
-      - name: Curl test
+      - name: curl tests
         run: |
           echo curl --location --request POST 'http://0.0.0.0:8001/toys' \
             --header 'Content-Type: application/json' \
