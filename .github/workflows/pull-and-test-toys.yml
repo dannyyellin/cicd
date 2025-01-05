@@ -4,6 +4,7 @@ on:
     workflows: ["build-and-push-toys"]
     types:
       - completed
+  workflow_dispatch:
 jobs:
   execute:
     runs-on: ubuntu-latest
