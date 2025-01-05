@@ -42,7 +42,7 @@ jobs:
 #        echo $(curl --location --request POST 'http://127.0.0.1:8000/toys?word=throw') >> mypath/results
 #        echo curl --location --request POST 'http://127.0.0.1:8000/toys?word=coffee' >> mypath/results
 #        echo $(curl --location --request POST 'http://127.0.0.1:8000/toys?word=coffee') >> mypath/results
-        echo curl --location --request GET 'http://127.0.0.1:8000/toys' >> mypath/results
+          echo curl --location --request GET 'http://127.0.0.1:8000/toys' >> mypath/results
           echo $(curl --location --request GET 'http://127.0.0.1:8000/toys') >> mypath/results
       - name: curl results
         run: cat mypath/results
