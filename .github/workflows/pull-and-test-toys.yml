@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Check if app is running
         run: docker ps
+      - name: checkdocker log
+        run: docker logs $(docker ps)
       - name: create directory
         run: mkdir mypath
       - name: curl tests
