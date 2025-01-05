@@ -14,10 +14,32 @@ jobs:
         ports:
            - 80:8000
     steps:
-      - name: Check if app is running
-        run: docker ps
+      - name: Check if a p is running
+        run: docker ps -a
       - name: create directory
         run: mkdir mypath
+      - name: Fetch container logs (if exists)
+        run: |
+          CONTAINER_ID=$(docker ps -a -q -f name=toyscontainer)
+          if [ -n "$CONTAINER_ID" ]; then
+            docker logs "$CONTAINER_ID"
+          else
+            echo "Container toyscontainer not found."
+          fi
+        shell: bash
+
+      - name: Inspect container
+        run: |
+          CONTAINER_ID=$(docker ps -a -q -f name=toyscontainer)
+          if [ -n "$CONTAINER_ID" ]; then
+            docker inspect "$CONTAINER_ID"
+          else
+            echo "Container toyscontainer not found."
+          fi
+        shell: bash
+
+      - name: check app again
+        run: docker ps -a
       - name: curl tests
         run: |
           curl --location --request GET 'http://127.0.0.1:80/toys'
