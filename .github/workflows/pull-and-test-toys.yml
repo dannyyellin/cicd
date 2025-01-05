@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Check if app is running
         run: docker ps
+      - name: Get container logs
+        run: docker logs $(docker ps -q -f name=toyscontainer)
       - name: create directory
         run: mkdir mypath
       - name: testing123
