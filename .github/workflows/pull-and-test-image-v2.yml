@@ -1,9 +1,10 @@
 name: pull-and-test-image-v2
-on:
-  workflow_run:
-    workflows: ["build-and-push-v2"]
-    types:
-      - completed
+  # commenting out next lines so it will not automatically execute on each push to dir when not using them
+#on:
+#  workflow_run:
+#    workflows: ["build-and-push-v2"]
+#    types:
+#      - completed
 jobs:
   execute:
     runs-on: ubuntu-latest

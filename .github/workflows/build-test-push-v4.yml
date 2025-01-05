@@ -1,6 +1,7 @@
 name: build-test-push-v4
-on:
-  push
+  # commenting out next lines so it will not automatically execute on each push to dir when not using them
+#on:
+#  push
 jobs:
   build:
     runs-on: ubuntu-latest
