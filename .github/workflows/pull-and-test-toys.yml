@@ -38,6 +38,21 @@ jobs:
           fi
         shell: bash
 
+      - name: Test curl to localhost
+        run: |
+          curl -v http://127.0.0.1:80/toys
+        shell: bash
+
+      - name: Curl from inside container
+        run: |
+          CONTAINER_ID=$(docker ps -a -q -f ancestor=dannyteaching/toys:latest)
+          if [ -n "$CONTAINER_ID" ]; then
+            docker exec "$CONTAINER_ID" curl -v http://127.0.0.1:8000/toys
+          else
+            echo "Container not found."
+          fi
+        shell: bash
+
       - name: check app again
         run: docker ps -a
       - name: curl tests
