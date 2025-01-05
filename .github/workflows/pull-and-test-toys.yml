@@ -15,10 +15,8 @@ jobs:
     steps:
       - name: Check if app is running
         run: docker ps
-
       - name: Create directory
         run: mkdir mypath
-
       - name: Curl test
         run: |
           echo curl --location --request POST 'http://0.0.0.0:8001/toys' \
