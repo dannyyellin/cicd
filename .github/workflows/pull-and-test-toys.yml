@@ -16,12 +16,11 @@ jobs:
     steps:
       - name: Check if app is running
         run: docker ps
-      - name: checkdocker log
-        run: docker logs $(docker ps -a -q -f name=toyscontainer)
       - name: create directory
         run: mkdir mypath
       - name: curl tests
         run: |
+          curl --location --request GET 'http://127.0.0.1:80/toys'
           echo curl --location --request POST 'http://0.0.0.0:80/toys' \
             --header 'Content-Type: application/json' \
             --data '{ 
