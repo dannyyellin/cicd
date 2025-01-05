@@ -58,7 +58,12 @@ jobs:
       - name: curl tests
         run: |
           curl -v 'http://127.0.0.1:80/toys'
-          --request GET 'http://127.0.0.1:80/toys'
+          curl --request GET 'http://127.0.0.1:80/toys'
+          echo curl --location --request POST 'http://0.0.0.0:80/toys' --header 'Content-Type: application/json' --data '{               "name": "blocks", 
+                "descr": "12 building blocks", 
+                "age": 3, 
+                "price": 18.00 
+            }' >> mypath/results 
           echo curl --location --request POST 'http://0.0.0.0:80/toys' \
             --header 'Content-Type: application/json' \
             --data '{ 
