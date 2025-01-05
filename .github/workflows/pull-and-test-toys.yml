@@ -17,7 +17,7 @@ jobs:
       - name: Check if app is running
         run: docker ps
       - name: checkdocker log
-        run: docker logs $(docker ps)
+        run: docker logs $(docker ps -a -q -f name=toyscontainer)
       - name: create directory
         run: mkdir mypath
       - name: curl tests
