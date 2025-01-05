@@ -18,23 +18,23 @@ jobs:
         run: docker ps -a
       - name: create directory
         run: mkdir mypath
-      - name: Fetch container logs (if exists)
+      - name: Fetch container logs (if exists) by image
         run: |
-          CONTAINER_ID=$(docker ps -a -q -f name=toyscontainer)
+          CONTAINER_ID=$(docker ps -a -q -f ancestor=dannyteaching/toys:latest)
           if [ -n "$CONTAINER_ID" ]; then
             docker logs "$CONTAINER_ID"
           else
-            echo "Container toyscontainer not found."
+            echo "Container based on image dannyteaching/toys:latest not found."
           fi
         shell: bash
 
       - name: Inspect container
         run: |
-          CONTAINER_ID=$(docker ps -a -q -f name=toyscontainer)
+          CONTAINER_ID=$(docker ps -a -q -f ancestor=dannyteaching/toys:latest)
           if [ -n "$CONTAINER_ID" ]; then
             docker inspect "$CONTAINER_ID"
           else
-            echo "Container toyscontainer not found."
+            echo "Container based on image dannyteaching/toys:latest not found."
           fi
         shell: bash
 
