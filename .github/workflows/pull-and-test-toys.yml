@@ -1,0 +1,50 @@
+name: pull-and-test-image-v2
+on:
+  workflow_run:
+    workflows: ["build-and-push-toys"]
+    types:
+      - completed
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    services:
+      toyscontainer:
+        image: dannyteaching/toys:latest
+        ports:
+           - 8000:80
+    steps:
+    - name: check if app is running
+      run: docker ps
+    - name: create directory
+      run: mkdir -p mypath
+    - name: curl
+      run: |
+        echo curl --location --request POST 'http://0.0.0.0:8001/toys' \
+              --header 'Content-Type: application/json' \
+              --data '{
+                "name": "blocks",
+                "descr": "12 building blocks",
+                "age": 3,
+                "price": 18.00
+              }' >> mypath/results
+        echo $(curl --location --request POST 'http://0.0.0.0:8001/toys' \
+              --header 'Content-Type: application/json' \
+              --data '{
+                "name": "blocks",
+                "descr": "12 building blocks",
+                "age": 3,
+                "price": 18.00
+              }') >> mypath/results
+#        echo $(curl --location --request POST 'http://127.0.0.1:8000/toys?word=wood') >> mypath/results
+#        echo curl --location --request POST 'http://127.0.0.1:8000/toys?word=silver' >> mypath/results
+#        echo $(curl --location --request POST 'http://127.0.0.1:8000/toys?word=silver') >> mypath/results
+#        echo curl --location --request POST 'http://127.0.0.1:8000/toys?word=throw' >> mypath/results
+#        echo $(curl --location --request POST 'http://127.0.0.1:8000/toys?word=throw') >> mypath/results
+#        echo curl --location --request POST 'http://127.0.0.1:8000/toys?word=coffee' >> mypath/results
+#        echo $(curl --location --request POST 'http://127.0.0.1:8000/toys?word=coffee') >> mypath/results
+        echo curl --location --request GET 'http://127.0.0.1:8000/toys' >> mypath/results
+        echo $(curl --location --request GET 'http://127.0.0.1:8000/toys') >> mypath/results
+    - name: curl results
+      run: cat mypath/results
+#    regarding workflow_run:
+#    https://stackoverflow.com/questions/62750603/github-actions-trigger-another-action-after-one-action-is-completed/62772822#62772822
