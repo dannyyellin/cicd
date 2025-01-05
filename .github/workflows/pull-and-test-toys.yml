@@ -17,8 +17,8 @@ jobs:
       run: docker ps
     - name: fake test
       run: ls
-    - name: create directory
-      run: mkdir mypath
+    # - name: create directory
+    #   run: mkdir mypath
     - name: curl
       run: |
         echo curl --location --request POST 'http://0.0.0.0:8001/toys' \
