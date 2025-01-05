@@ -1,4 +1,4 @@
-name: pull-and-test-image-v2
+name: pull-and-test-toys
 on:
   workflow_run:
     workflows: ["build-and-push-toys"]
