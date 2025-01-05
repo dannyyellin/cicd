@@ -57,7 +57,7 @@ jobs:
         run: docker ps -a
       - name: curl tests
         run: |
-          curl -v
+          curl -v 'http://127.0.0.1:80/toys'
           --request GET 'http://127.0.0.1:80/toys'
           echo curl --location --request POST 'http://0.0.0.0:80/toys' \
             --header 'Content-Type: application/json' \
