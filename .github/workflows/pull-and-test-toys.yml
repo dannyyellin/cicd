@@ -27,25 +27,25 @@ jobs:
             echo "Container based on image dannyteaching/toys:latest not found."
           fi
         shell: bash
-      - name: Test curl to localhost
-        if: always()
-        run: |
-          curl -v http://127.0.0.1:80/toys
-        shell: bash
+#      - name: Test curl to localhost
+#        if: always()
+#        run: |
+#          curl -v http://127.0.0.1:80/toys
+#        shell: bash
       - name: curl tests
         if: always()
         run: |
           curl -v 'http://127.0.0.1:80/toys'
           curl --request GET 'http://127.0.0.1:80/toys'
-          echo "TEST Results\n" >> mypath/results
+          echo "TEST Results" >> mypath/results
       - name: curl tests part 2
         if: always()
         run: |
-          echo curl --location --request POST 'http://0.0.0.0:80/toys' --header 'Content-Type: application/json' --data '{"name": "blocks", 
-                "descr": "12 building blocks", 
-                "age": 3, 
-                "price": 18.00 
-            }' >> mypath/results 
+#          echo curl --location --request POST 'http://0.0.0.0:80/toys' --header 'Content-Type: application/json' --data '{"name": "blocks",
+#                "descr": "12 building blocks",
+#                "age": 3,
+#                "price": 18.00
+#            }' >> mypath/results
           echo curl --location --request POST 'http://0.0.0.0:80/toys' \
             --header 'Content-Type: application/json' \
             --data '{ 
