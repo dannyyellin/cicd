@@ -27,11 +27,6 @@ jobs:
             echo "Container based on image dannyteaching/toys:latest not found."
           fi
         shell: bash
-#      - name: Test curl to localhost
-#        if: always()
-#        run: |
-#          curl -v http://127.0.0.1:80/toys
-#        shell: bash
       - name: curl tests
         if: always()
         run: |
