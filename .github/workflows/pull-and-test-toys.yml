@@ -40,7 +40,7 @@ jobs:
           echo curl --location --request GET 'http://127.0.0.1:80/toys' >> mypath/results
           echo $(curl --location --request GET 'http://127.0.0.1:80/toys') >> mypath/results
       - name: curl results
-        if always():
+        if: always()
         run: cat mypath/results
 #    regarding workflow_run:
 #    https://stackoverflow.com/questions/62750603/github-actions-trigger-another-action-after-one-action-is-completed/62772822#62772822
