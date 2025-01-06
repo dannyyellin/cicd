@@ -18,43 +18,54 @@ jobs:
         run: docker ps -a
       - name: create directory to store test results
         run: mkdir mypath
+      - name: Inspect container (helpful for debugging)
+        run: |
+          CONTAINER_ID=$(docker ps -a -q -f ancestor=dannyteaching/toys:latest)
+          if [ -n "$CONTAINER_ID" ]; then
+            docker inspect "$CONTAINER_ID"
+          else
+            echo "Container based on image dannyteaching/toys:latest not found."
+          fi
+        shell: bash
       - name: curl test1
         run: |
           echo curl -v --location --request POST 'http://0.0.0.0:80/toys' \
             --header 'Content-Type: application/json' \
             --data '{
-                "name": "blocks", 
-                "descr": "12 building blocks", 
-                "age": 3, 
-                "price": 18.00 
+                "name": "blocks",
+                "descr": "12 building blocks",
+                "age": 3,
+                "price": 18.00
             }' >> mypath/results
           echo $(curl -v --location --request POST 'http://0.0.0.0:80/toys' \
             --header 'Content-Type: application/json' \
-            --data '{ 
-                "name": "blocks", 
-                "descr": "12 building blocks", 
-                "age": 3, 
-                "price": 18.00 
+            --data '{
+                "name": "blocks",
+                "descr": "12 building blocks",
+                "age": 3,
+                "price": 18.00
             }') >> mypath/results
       - name: curl test2
+        if: always()
         run: |
           echo curl -v --location --request POST 'http://0.0.0.0:80/toys' \
             --header 'Content-Type: application/json' \
-            --data '{ 
-                "name": "Zoo day", 
-                "descr": "Pictures of zoo animals", 
-                "age": 4, 
-                "price": 26.00 
+            --data '{
+                "name": "Zoo day",
+                "descr": "Pictures of zoo animals",
+                "age": 4,
+                "price": 26.00
             }' >> mypath/results
           echo $(curl -v --location --request POST 'http://0.0.0.0:80/toys' \
             --header 'Content-Type: application/json' \
-            --data '{ 
-                "name": "Zoo day", 
-                "descr": "Pictures of zoo animals", 
-                "age": 4, 
-                "price": 26.00 
+            --data '{
+                "name": "Zoo day",
+                "descr": "Pictures of zoo animals",
+                "age": 4,
+                "price": 26.00
             }') >> mypath/results
       - name: curl test3
+        if: always()
         run: |
           echo curl -v --location --request GET 'http://0.0.0.0:80/toys' >> mypath/results
           echo $(curl -v --location --request GET 'http://0.0.0.0:80/toys') >> mypath/results
@@ -68,6 +79,7 @@ jobs:
             echo "Container based on image dannyteaching/toys:latest not found."
           fi
       - name: curl results
+        if: always()
         run: cat mypath/results
 #    regarding workflow_run:
 #    https://stackoverflow.com/questions/62750603/github-actions-trigger-another-action-after-one-action-is-completed/62772822#62772822
