@@ -18,15 +18,6 @@ jobs:
         run: docker ps -a
       - name: create directory to store test results
         run: mkdir mypath
-      - name: Inspect container (helpful for debugging)
-        run: |
-          CONTAINER_ID=$(docker ps -a -q -f ancestor=dannyteaching/toys:latest)
-          if [ -n "$CONTAINER_ID" ]; then
-            docker inspect "$CONTAINER_ID"
-          else
-            echo "Container based on image dannyteaching/toys:latest not found."
-          fi
-        shell: bash
       - name: curl test1
         run: |
           echo curl -v --location --request POST 'http://0.0.0.0:80/toys' \
