@@ -29,13 +29,13 @@ jobs:
         shell: bash
       - name: curl test1
         run: |
-          echo curl --location --request POST 'http://0.0.0.0:80/toys' --header 'Content-Type: application/json' --data '{
+          echo curl -v --location --request POST 'http://0.0.0.0:80/toys' --header 'Content-Type: application/json' --data '{
                 "name": "blocks", 
                 "descr": "12 building blocks", 
                 "age": 3, 
                 "price": 18.00 
             }' >> mypath/results 
-          echo $(curl --location --request POST 'http://0.0.0.0:80/toys' --header 'Content-Type: application/json' --data '{ 
+          echo $(curl -v --location --request POST 'http://0.0.0.0:80/toys' --header 'Content-Type: application/json' --data '{ 
                 "name": "blocks", 
                 "descr": "12 building blocks", 
                 "age": 3, 
@@ -44,7 +44,7 @@ jobs:
       - name: curl test2
         if: always()
         run: |
-          echo $(curl --location --request POST 'http://0.0.0.0:80/toys' \
+          echo $(curl-v --location --request POST 'http://0.0.0.0:80/toys' \
             --header 'Content-Type: application/json' \
             --data '{ 
                 "name": "Zoo day", 
@@ -52,7 +52,7 @@ jobs:
                 "age": 4, 
                 "price": 26.00 
             }') >> mypath/results
-          echo curl --location --request POST 'http://0.0.0.0:80/toys' \
+          echo curl -v --location --request POST 'http://0.0.0.0:80/toys' \
                       --header 'Content-Type: application/json' \
                       --data '{ 
                           "name": "Zoo day", 
@@ -63,8 +63,8 @@ jobs:
       - name: curl test3
         if: always()
         run: |
-          echo curl --location --request GET 'http://0.0.0.0:80/toys' >> mypath/results
-          echo $(curl --location --request GET 'http://0.0.0.0:80/toys') >> mypath/results
+          echo curl -v --location --request GET 'http://0.0.0.0:80/toys' >> mypath/results
+          echo $(curl -v --location --request GET 'http://0.0.0.0:80/toys') >> mypath/results
       - name: curl results
         run: cat mypath/results
 #    regarding workflow_run:
