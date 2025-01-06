@@ -53,8 +53,8 @@ jobs:
                 "age": 4, 
                 "price": 26.00 
             }') >> mypath/results
-          echo curl --location --request GET 'http://127.0.0.1:80/toys' >> mypath/results
-          echo $(curl --location --request GET 'http://127.0.0.1:80/toys') >> mypath/results
+          echo curl --location --request GET 'http://0.0.0.0:80/toys' >> mypath/results
+          echo $(curl --location --request GET 'http://0.0.0.0:80/toys') >> mypath/results
       - name: curl results
         run: cat mypath/results
 #    regarding workflow_run:
