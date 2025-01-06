@@ -27,7 +27,7 @@ jobs:
             echo "Container based on image dannyteaching/toys:latest not found."
           fi
         shell: bash
-      - name: curl tests
+      - name: curl test1
         run: |
           echo curl --location --request POST 'http://0.0.0.0:80/toys' \
             --header 'Content-Type: application/json' \
@@ -45,6 +45,9 @@ jobs:
                 "age": 3, 
                 "price": 18.00 
             }') >> mypath/results
+      - name: curl test2
+        if: always()
+        run: |
           echo $(curl --location --request POST 'http://0.0.0.0:80/toys' \
             --header 'Content-Type: application/json' \
             --data '{ 
@@ -53,6 +56,17 @@ jobs:
                 "age": 4, 
                 "price": 26.00 
             }') >> mypath/results
+          echo curl --location --request POST 'http://0.0.0.0:80/toys' \
+                      --header 'Content-Type: application/json' \
+                      --data '{ 
+                          "name": "Zoo day", 
+                          "descr": "Pictures of zoo animals", 
+                          "age": 4, 
+                          "price": 26.00 
+                      }' >> mypath/results
+      - name: curl test3
+        if: always()
+        run: |
           echo curl --location --request GET 'http://0.0.0.0:80/toys' >> mypath/results
           echo $(curl --location --request GET 'http://0.0.0.0:80/toys') >> mypath/results
       - name: curl results
