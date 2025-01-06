@@ -14,11 +14,11 @@ jobs:
         ports:
            - 80:8000
     steps:
-      - name: Check if a p is running
+      - name: Check if the container is running
         run: docker ps -a
-      - name: create directory
+      - name: create directory to store test results
         run: mkdir mypath
-      - name: Inspect container
+      - name: Inspect container (helpful for debugging)
         run: |
           CONTAINER_ID=$(docker ps -a -q -f ancestor=dannyteaching/toys:latest)
           if [ -n "$CONTAINER_ID" ]; then
@@ -28,13 +28,6 @@ jobs:
           fi
         shell: bash
       - name: curl tests
-        if: always()
-        run: |
-          echo "TEST Results" >> mypath/results
-          echo curl --location --request GET 'http://127.0.0.1:80/toys' >> mypath/results
-          echo $(curl --location --request GET 'http://127.0.0.1:80/toys') >> mypath/results
-      - name: curl tests part 2
-        if: always()
         run: |
           echo curl --location --request POST 'http://0.0.0.0:80/toys' \
             --header 'Content-Type: application/json' \
@@ -52,10 +45,17 @@ jobs:
                 "age": 3, 
                 "price": 18.00 
             }') >> mypath/results
+          echo $(curl --location --request POST 'http://0.0.0.0:80/toys' \
+            --header 'Content-Type: application/json' \
+            --data '{ 
+                "name": "Zoo day", 
+                "descr": "Pictures of zoo animals", 
+                "age": 4, 
+                "price": 26.00 
+            }') >> mypath/results
           echo curl --location --request GET 'http://127.0.0.1:80/toys' >> mypath/results
           echo $(curl --location --request GET 'http://127.0.0.1:80/toys') >> mypath/results
       - name: curl results
-        if: always()
         run: cat mypath/results
 #    regarding workflow_run:
 #    https://stackoverflow.com/questions/62750603/github-actions-trigger-another-action-after-one-action-is-completed/62772822#62772822
