@@ -29,7 +29,7 @@ jobs:
         shell: bash
       - name: curl tests
         run: |
-          echo curl --location --request POST 'http://0.0.0.0:80:80/toys' \
+          echo curl --location --request POST 'http://0.0.0.0:80/toys' \
             --header 'Content-Type: application/json' \
             --data '{ 
                 "name": "blocks", 
