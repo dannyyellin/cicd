@@ -29,17 +29,13 @@ jobs:
         shell: bash
       - name: curl test1
         run: |
-          echo curl --location --request POST 'http://0.0.0.0:80/toys' \
-            --header 'Content-Type: application/json' \
-            --data '{ 
+          echo curl --location --request POST 'http://0.0.0.0:80/toys' --header 'Content-Type: application/json' --data '{
                 "name": "blocks", 
                 "descr": "12 building blocks", 
                 "age": 3, 
                 "price": 18.00 
             }' >> mypath/results 
-          echo $(curl --location --request POST 'http://0.0.0.0:80/toys' \
-            --header 'Content-Type: application/json' \
-            --data '{ 
+          echo $(curl --location --request POST 'http://0.0.0.0:80/toys' --header 'Content-Type: application/json' --data '{ 
                 "name": "blocks", 
                 "descr": "12 building blocks", 
                 "age": 3, 
