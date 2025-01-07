@@ -20,7 +20,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: toys-image
-        path: /tmp/image.tar
+        path: /tmp/image.tar  # downloads the image (named image.tar) to the /tmp dir
   test:
     needs: build
     runs-on: ubuntu-latest
@@ -30,9 +30,9 @@ jobs:
       uses: actions/download-artifact@v4  # downloads all artifacts
       with:
         name: toys-image
-        path: /tmp/image.tar
+        path: /tmp
     - name: Load Docker images from previous workflows
-      run: docker load --input toys-image  # /image.tar
+      run: docker load --input tmp/image.tar
     - name: check toys-image image is loaded
       run: docker image ls
     - name: run image in container
