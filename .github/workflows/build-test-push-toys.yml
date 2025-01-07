@@ -28,8 +28,11 @@ jobs:
 #    # 1. download image and run it in a container
     - name: Download artifact
       uses: actions/download-artifact@v4  # downloads all artifacts
+      with:
+        name: toys-image
+        path: /tmp/image.tar
     - name: Load Docker images from previous workflows
-      run: docker load --input toys-image/image.tar
+      run: docker load --input toys-image  # /image.tar
     - name: check toys-image image is loaded
       run: docker image ls
     - name: run image in container
