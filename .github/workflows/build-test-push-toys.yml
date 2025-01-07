@@ -32,9 +32,9 @@ jobs:
         name: toys-image
         path: /tmp
     - name: Verify downloaded artifact
-      run: ls -l tmp
+      run: ls -l /tmp
     - name: Load Docker images from previous workflows
-      run: docker load --input tmp/image.tar
+      run: docker load --input /tmp/image.tar
     - name: check toys-image image is loaded
       run: docker image ls
     - name: run image in container
