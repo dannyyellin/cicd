@@ -38,7 +38,7 @@ jobs:
     - name: check toys-image image is loaded
       run: docker image ls
     - name: run image in container
-      run: docker run -p8000:8000 toys-image &
+      run: docker run -p8000:8000 toys &
     - name: Check container is running
       run: docker ps
 #    # 2. set up python and pytest environment
