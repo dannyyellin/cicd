@@ -19,7 +19,7 @@ toy2 = {
 }
 
 
-urlToys = 'http://localhost:8001/toys'
+urlToys = 'http://localhost:8000/toys'
 
 def assert_fields_equal(record1: dict, record2: any):
     if type(record2) != type(record1):  # check that record2 is also a dictionary
