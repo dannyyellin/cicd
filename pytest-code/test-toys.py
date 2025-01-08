@@ -1,7 +1,8 @@
 import requests
 import json
-import connectionController
-from assertions import *
+import sys
+
+global id1,id2, toy1, toy2
 
 toy1 = {
     "name": "blocks",
@@ -17,98 +18,84 @@ toy2 = {
     "price": 25.00
 }
 
-toy3 = {
-    "name": "water toy",
-    "descr": "boat to use in bathtub",
-    "age": 5,
-    "price": 37.00
-}
-
 
 urlToys = 'http://localhost:8001/toys'
-global id1,id2
 
 def assert_fields_equal(record1: dict, record2: any):
     if type(record2) != type(record1):  # check that record2 is also a dictionary
-        print(f'Returned object is not of type {str(type(record1))}\n')
-        print("----->  FAILED <----- assert_fields_equal")
-        sys.stdout.flush()
+        # print(f'assert_fields_equal: Returned object is not of type {str(type(record1))}\n')
         return False
     for field in record1.keys():
         if field not in record2:
-            print(f'Expected field named "{field}" in returned object but it was missing. Returned object = {record2}\n')
-            print("----->  FAILED <----- assert_fields_equal")
-            sys.stdout.flush()
+            # print(f'assert_fields_equal: Expected field named "{field}" in returned object but it was missing. Returned object = {record2}\n')x
             return False
         if record1[field] != record2[field]:
-            print(f'Field "{field}" in returned object: {record2[field]} does not match expected value: {record1[field]}')
-            print("----->  FAILED <----- assert_fields_equal")
-            sys.stdout.flush()
+            # print(f'assert_fields_equal: Field "{field}" in returned object: {record2[field]} does not match expected value: {record1[field]}')
             return False
-    print("++++++ passed assert_fields_equal")
-    True
+    # print("passed assert_fields_equal")
+    return True
 
 
-# def test_get_not_exists_word_id():
-#     global id1
-#     NOT_EXISTS_WORD_ID = 11235
-#     response = connectionController.http_get(f"words/{NOT_EXISTS_WORD_ID}")
-#     assert_status_code(response, status_code=404)
-#     assert_ret_value(response, returned_value=0)
+# test_collection_contains_field_values checks that given a list of objects, a json field name field, and a list of
+# values, for each v in the list of values there exists a record r in coll such that r[field] = v
+def assert_collection_contains_field_values(coll: list, field: str, values: list):
+    # print(f"assert_collection_container_field_values:  coll = {coll}\n field = {field}\n values = {values}")
+    for v in values:
+        try:
+            if not [c for c in coll if c[field] == v]:
+                # print(f"assert_collection_contains_field_values: No object in returned array with {field} == {v}")
+                return False
+        except Exception as e:
+            # print("failed assert_collection_contains_field_values")
+            # print("Exception = ", str(e))
+            return False
+    # otherwise found that the collection satisfies the assertion
+    return True
 
-def test_post_toy1(toy1):
-    global id1
+
+def test_post_toy1():
+    global toy1, id1
     json_data = json.dumps(toy1)
     response = requests.post(urlToys,
         headers={"Content-Type":"application/json"},
         data=json_data)
-    print("response from POST toy1 is ", response.json())
+    # print("response from POST toy1 is ", response.json())
     id1 = response.json()['id']
     assert response.status_code == 201
+
 
 def test_get_toy1():
     global id1
     response2 = requests.get(urlToys + '/' + id1)
-    print(f"response from GET toys {id1} is {response2.json()}")
+    # print(f"response from GET toys {id1} is {response2.json()}")
     assert response2.status_code == 200
     assert_fields_equal(toy1, response2.json())
 
-# def get_all():
 
-def test_post_toy2(toy1):
-    global id2
+def test_post_toy2():
+    global toy2, id2
     json_data = json.dumps(toy2)
     response3 = requests.post(urlToys,
         headers={"Content-Type":"application/json"},
         data=json_data)
-    print(f"response from POST toy2 is {response3.json()}")
+    # print(f"response from POST toy2 is {response3.json()}")
     id2 = response3.json()['id']
     assert response3.status_code == 201
 
-# response4 = requests.get(urlToys)
-# print("response from GET (ALL) toys", response4.json())
-#
-#
-# response5= requests.get(urlToys+"?price=25.00")
-# print("response from GET (ALL) toys with price = 25.00", response5.json())
-#
-# response6 = requests.delete(urlToys + '/' + id1)
-# print(f"response from DELETE toy1 is {response6.text}")
-#
-# response7  = requests.get(urlToys)
-# print("response from GET (ALL) toys", response7.json())
-#
-# json_data = json.dumps(toy3)
-# response8 = requests.post(urlToys,
-#                 headers={"Content-Type":"application/json"},
-#                 data=json_data)
-# print("response from POST toy3 is ", response8.json())
-# id1 = response.json()['id']
-#
-# response9  = requests.get(urlToys)
-# print("response from GET (ALL) toys", response9.json())
 
+def test_get_toy2():
+    global id2, allToys
+    response2 = requests.get(urlToys + '/' + id2)
+    # print(f"response from GET toys {id2} is {response2.json()}")
+    assert response2.status_code == 200
+    assert_fields_equal(toy1, response2.json())
 
+def test_get_all():
+    global id1, id2
+    response4 = requests.get(urlToys)
+    all_toys = response4.json()
+    assert response4.status_code == 200
+    # assert that the collection returned contains toys with id1 and id2
+    assert_collection_contains_field_values(all_toys, "id", [id1, id2])
 
-# response10= requests.get(urlToys+"?age=5")
-# print("response from GET (ALL) toys with age = 5", response10.json())
+# to see print statements, issue command: pytest -s
