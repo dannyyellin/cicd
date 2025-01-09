@@ -79,6 +79,6 @@ jobs:
       run: |
         docker push ${{ secrets.DOCKER_COURSE_USERNAME }}/toys
         docker tag ${{ secrets.DOCKER_COURSE_USERNAME }}/toys \
-        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
+        ${{ secrets.DOCKER_COURSE_USERNAME }}/toys:${{ env.DATE }}
         docker push \
-        ${{ secrets.DOCKER_COURSE_USERNAME }}/wordsvr-v2:${{ env.DATE }}
+        ${{ secrets.DOCKER_COURSE_USERNAME }}/toys:${{ env.DATE }}
