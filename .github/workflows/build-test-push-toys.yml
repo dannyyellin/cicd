@@ -52,7 +52,7 @@ jobs:
         pip install pytest # not using "yet" lint checker like ruff
         pip install requests
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-#      # 3. run pytest tests and upload the results
+#      # 3. run pytest tests and upload the results to GH_test_results
     - name: check for pytest directory
       run: |
         ls -l 
